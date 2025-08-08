@@ -1,0 +1,39 @@
+<div class="top_bar">
+
+	<!-- Menu icon -->
+		<div id="menu_icon" onclick="page.toggle_menu(this)"><i class="fas fa-bars"></i></div>
+
+	<!-- Global page title -->
+		<div class="global_title" onclick="window.location.href='<?php echo __WEB_ROOT_WEB__ ?>'"><?php echo $page_global_title ?></div>	
+
+	<!-- lang switcher -->
+		<ul class="page_lang_selector">
+			<li id="lang_globe"><i class="fa fa-globe"></i></li>
+			<?php foreach (json_decode(WEB_AR_LANGS) as $lang => $lang_name) { ?>
+			<li><a href="?lang=<?php echo $lang ?>"><?php echo $lang_name ?></a></li>
+			<?php }	?>
+		</ul>
+
+	<!-- Nav -->
+		<nav id="nav" class="hide">
+
+			<?php echo $menu_tree_html ?>
+
+			<?php /*
+			<ul class="links">
+				<li role="main_home"><a href="<?php echo __WEB_ROOT_WEB__ ?>"><?php echo tstring('inicio') ?></a></li>
+				<li role="catalogo"><a href="<?php echo __WEB_ROOT_WEB__ ?>/catalogo"><?php echo tstring('catalogo') ?></a></li>
+				<li role="biblio"><a href="<?php echo __WEB_ROOT_WEB__ ?>/biblio"><?php echo tstring('bibliografia') ?></a></li>
+				<li role="proyecto"><a href="<?php echo __WEB_ROOT_WEB__ ?>/proyecto"><?php echo tstring('proyecto') ?></a></li>
+			</ul>
+			
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+			</ul>
+			*/ ?>
+		</nav>
+
+</div>

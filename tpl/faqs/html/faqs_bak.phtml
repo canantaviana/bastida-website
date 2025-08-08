@@ -1,0 +1,94 @@
+<?php
+# REQUIRED FILES
+	$base_path = dirname(dirname(__FILE__));
+	$cwd 	   = basename($base_path); # Current dir name
+
+	# Curent controller add
+	require($base_path .'/'. $cwd .'.php');
+?>
+<!-- Wrapper -->
+	<div id="wrapper" class="wrapper style2 align-left">
+
+		<!-- Main -->
+			<?php /*<div id="main">*/?>
+				
+				<!-- Title -->
+					<section class="header_main">
+						<header class="major">
+							<h1><?php echo $title ?></h1>
+						</header>
+						<?php echo $abstract ?>
+						<?php if(!empty($isbn)) echo '<div>ISBN: ' .$isbn. '</div>' ?>
+					</section>
+					
+				<!-- Images -->
+					<?php if(!empty($ar_image)) { ?>
+					<section class="images <?php echo $this->area_table ?> banner onload-image-fade-in">
+						<?php foreach ($ar_image as $key => $image) { ?>
+							<?php $footer_text = isset($ar_image_footer[$key]) ? $ar_image_footer[$key] : null  ?>
+							<a href="<?php echo $image ?>" class="gallery image fit" title="<?php echo $footer_text; ?>">
+								<img src="<?php echo $image ?>" alt="" class="image_big"/>
+							<?php if(!empty($footer_text)) { ?>
+								<span class="image_footer"><?php echo $footer_text; ?></span>
+							<?php } ?>
+							</a>
+							
+						<?php } ?>
+					</section>
+					<?php } ?>				
+
+				<!-- Videos -->
+					<?php if(!empty($ar_video)) { ?>
+					<section class="videos">
+						<?php foreach ($ar_video as $key => $video) { ?>
+							<video controls poster="<?php echo str_replace(['/404/','.mp4'], ['/posterframe/','.jpg'], $video) ?>">
+								<source src="<?php echo $video ?>" type="video/mp4">
+							</video>							
+						<?php } ?>
+					</section>
+					<?php } ?>
+
+				<!-- Content -->
+					<section class="content">
+						<?php echo $body ?>
+					</section>
+
+				<!-- PDF -->
+					<?php if (!empty($pdf)) { ?>
+					<section class="pdf">
+						<ul class="actions stacked">
+							<li><a href="<?php echo $pdf ?>" class="button big wide smooth-scroll-middle"><i class="far fa-file-pdf"></i> <?php echo tstring('descargar') ?></a></li>
+						</ul>
+					</section>
+					<?php } ?>
+
+				<!-- Portals -->
+					<div id="portals_list"></div>
+
+				<!-- Gallery -->
+					<?php if (!empty($gallery_data)) { ?>
+					<section class="images">
+						<?php foreach ($gallery_data as $key => $gallery) { ?>
+							<a href="<?php echo $image ?>" class="gallery image fit">
+								<img src="<?php echo $image ?>" alt="" class="image_big" />
+							</a>
+						<?php } ?>
+					</section>
+					<?php } ?>
+
+				
+				
+			<?php /*</div>*/?>
+		
+		<!-- Footer -->
+			<?php echo $this->footer_html ?>
+
+	</div>
+
+<?php echo $this->get_header_links('js') ?>
+<script type="text/javascript">
+	WEB_AREA='<?php echo $this->area_name ?>';
+	generic.setup({
+		data_list : <?php echo json_encode($data_list) ?>
+	})
+</script>

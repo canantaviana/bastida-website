@@ -1,0 +1,24 @@
+.error_content {
+  padding: 40px;
+  border-radius: 4px;
+  background-color: #000000;
+  background-image: url('../../assets/images/bastida_aerea.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  height: 100vh;
+  color: #ffffff;
+  padding-top: 75px;
+  font-weight: 900;
+}
+.error_content a {
+  color: #ffffff;
+  padding: 40px;
+}
+.error_content h1,
+.error_content h2 {
+  color: #ffffff;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+/*# sourceMappingURL=error.css.map */

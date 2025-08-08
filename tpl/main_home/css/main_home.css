@@ -1,0 +1,16 @@
+.top_bar {
+  display: none;
+}
+.area_header:not(#first) {
+  background-color: #1b170e;
+}
+.area_header:not(#first) h2 {
+  color: #ffffff !important;
+  font-weight: 900;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+.spotlight.style1.orient-right.white {
+  background-color: #fbfbfb;
+}
+/*# sourceMappingURL=main_home.css.map */

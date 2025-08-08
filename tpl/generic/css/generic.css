@@ -1,0 +1,200 @@
+/* LIBRARY
+--------------------------------------------------------- */
+/* SIZES
+----------------------------------------- */
+/* COLORS
+--------------------------------------------------------- 
+@default_text_color : #161616;
+@grey_mid_color : #d5d7db;
+@grey_dark_color : #afb4b9;
+@selected_text_color : #fb8218;
+@background_button : #adadad;*/
+/* FONTS
+--------------------------------------------------------- 
+@default_font_light 	: 'sf_pro_displaylight', sans-serif;
+@default_font_ultralight: 'sf_pro_displayultralight', sans-serif;
+@default_font_thin 		: 'sf_pro_displaythin', sans-serif;
+@default_font_medium 	: 'sf_pro_displaymedium', sans-serif;
+@default_font_regular 	: 'sf_pro_displayregular', sans-serif;
+@default_font_bold 		: 'sf_pro_displaybold', sans-serif;
+@default_font_ultrabold : 'sf_pro_displaybold', sans-serif; // Same as bold for now
+@default_glyphicons 	: 'Glyphicons Halflings';*/
+#wrapper .videos {
+  display: flex;
+  flex-wrap: wrap;
+}
+#wrapper .videos > video {
+  width: 48%;
+  background-color: #000000;
+  flex: 0 0 ;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  object-fit: cover;
+}
+@media screen and (max-width: 480px) {
+  #wrapper .videos > video {
+    width: 100%;
+  }
+}
+#wrapper section.images > a.image.fit {
+  max-height: 65vh;
+  overflow: hidden;
+}
+#wrapper section.images.publicaciones,
+#wrapper section.images.publicaciones_externas {
+  width: 50%;
+  margin-bottom: 1.5em;
+}
+#wrapper section.images.publicaciones > a,
+#wrapper section.images.publicaciones_externas > a {
+  margin: 0;
+  border: 1px solid #cecece;
+}
+#wrapper section.images.galeria_digital {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-column-gap: 2em;
+}
+#wrapper section.images.galeria_digital > a .inner {
+  height: 45vh;
+  width: 100%;
+  border-radius: 4px;
+}
+@media screen and (max-width: 480px) {
+  #wrapper section.images.galeria_digital > a .inner {
+    height: 25vh;
+  }
+}
+#wrapper section.images.galeria_digital > a .inner img {
+  -moz-object-fit: cover;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  object-fit: cover;
+  -moz-object-position: top;
+  -webkit-object-position: top;
+  -ms-object-position: top;
+  object-position: top;
+  height: 100%;
+  width: 100%;
+}
+.videos_list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.videos_list > div {
+  padding-right: 1em;
+}
+.videos_list > div strong {
+  line-height: 2em;
+}
+.videos_list > div p {
+  line-height: 1.2em;
+}
+.videos_list > div iframe {
+  min-height: 100%;
+  margin-top: 1em;
+}
+@media screen and (max-width: 480px) {
+  .videos_list > div iframe {
+    width: 100% !important;
+    height: 16em;
+  }
+}
+.videos_list > div img {
+  margin-top: 1em;
+}
+@media screen and (max-width: 480px) {
+  .videos_list > div img:not(.logo_rne) {
+    width: 100% !important;
+  }
+}
+#portals_list {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  /*
+		>ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			margin-top: 0.5em;
+
+			>li {
+				margin: 0;
+				padding: 0;
+				display: flex;
+
+				&:hover {
+					background-color: #FAFAFA;
+				}
+    			
+
+				div.image {
+					max-width: 15em;
+    				overflow: hidden;
+
+					img {
+						height: 10em;
+					}
+				}
+
+				.content {
+					padding: 1em;
+				}
+			}			
+		}
+		*/
+}
+#portals_list .actions {
+  text-align: right;
+  padding: 1em;
+  padding-top: 1.5em;
+}
+#portals_list .image {
+  cursor: pointer;
+}
+#portals_list .image:hover {
+  opacity: 0.85;
+}
+#portals_list .image:active {
+  opacity: 1;
+}
+#portals_list .spinner_list {
+  height: 10em;
+  background-color: #76E8DD;
+}
+#portals_list section {
+  margin-bottom: 2px;
+}
+#portals_list .spotlight.style1 .image img {
+  -moz-object-fit: cover;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  object-fit: cover;
+  -moz-object-position: top;
+  -webkit-object-position: top;
+  -ms-object-position: top;
+  object-position: top;
+}
+/*
+// main
+	#main {
+		overflow: hidden;
+		padding-bottom: 2rem;
+	}
+
+
+// images
+	section.images {
+		display: flex;
+
+		a.image {
+			margin: auto ;
+
+			img {
+				max-width: 100%;				
+			}
+		}
+	}
+	*/
+/*# sourceMappingURL=generic.css.map */

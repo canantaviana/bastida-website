@@ -1,0 +1,39 @@
+<?php
+# REQUIRED FILES
+	$base_path = dirname(dirname(__FILE__));
+	$cwd 	   = basename($base_path); # Current dir name
+
+	# Curent controller add
+	require($base_path .'/'. $cwd .'.php');
+?>
+<!-- Wrapper -->
+	<div id="wrapper" class="wrapper style2 align-left divided">
+
+		<!-- Header -->
+			<?php #echo $this->header_html ?>
+
+		<!-- Nav -->
+			<?php #echo $this->nav_html ?>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- error -->
+					<section class="header_main error_content">
+						<header class="major">
+							<h1>ERROR</h1>
+							<h2>Sorry. Page not found: <?php echo $this->area_name ?></h2>
+						</header>
+					</section>
+
+			</div>
+		
+		<!-- Footer -->
+			<?php echo $this->footer_html ?>
+
+	</div>
+
+<?php echo $this->get_header_links('js') ?>
+<script type="text/javascript">
+	WEB_AREA='<?php echo $this->area_name ?>';
+</script>

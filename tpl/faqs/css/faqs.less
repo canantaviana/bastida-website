@@ -1,0 +1,198 @@
+// Variables
+	@assets_path: "../../assets";
+	@fonts_path: "@{assets_path}/fonts";
+	@path_page: "../../page";
+
+// Usage library
+	@import "@{path_page}/css/library.less";
+
+
+// wrapper
+	#wrapper { 
+		max-width: 1800px;
+		margin: 0 auto;
+
+	}
+
+	section {
+		margin-bottom: 1em !important;
+	}
+
+
+// portals_list
+	#portals_list {
+
+		@media screen and (max-width: 768px){
+			font-size: 1.2em;
+		}
+
+		@media screen and (max-width: 520px){
+			font-size: 1.4em;
+		}
+
+		padding-bottom: 2em;
+
+		.content {
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			cursor: pointer;
+		}
+
+		.left-align-text {
+			text-align: left;
+			margin-bottom: 0;
+		}
+
+		.justify-text {
+			text-align: justify;
+		}
+
+		.question {
+			float:left;
+			margin-right: 0.5em;
+
+			@media screen and (max-width: 768px){
+				width: 100%;
+    			text-align: center;
+			}
+		}
+
+		.answer {
+			background-color: #F9F9F9;
+			padding: 3%;
+			// font-style: italic; // No le gusta a Jaime
+			clear:left;
+			margin-top: 2.5em;
+		}
+
+		.questions-icons {
+			margin: 0 auto;
+			margin-right: 0.5em;
+			font-size: 1.5em;
+			float: left;
+
+			@media screen and (max-width: 768px){
+				width: 100%;
+    			text-align: center;
+			}
+		}
+
+
+		.fa-sort-down {
+			line-height: 0.7;
+		}
+
+		.rotate-icon{
+			line-height: 1.5;
+		}
+
+		.actions {
+			text-align: right;
+    		padding: 1em;
+    		padding-top: 1.5em;
+		}
+
+		.image {
+			cursor: pointer;
+
+			&:hover {
+				opacity: 0.85;
+			}
+			&:active {
+				opacity: 1;				
+			}
+
+			>img {			
+				
+			}			
+		}
+
+
+		
+
+		.spinner_list {
+			height: 10em;
+			background-color: #76E8DD;
+		}
+
+		section {
+			margin-bottom: 2px;
+
+			&:hover {
+				background-color: #dfdfdf;
+			}
+
+		}
+
+		.spotlight.style1 {
+			.image img {
+				-moz-object-fit: cover;
+				-webkit-object-fit: cover;
+				-ms-object-fit: cover;
+				object-fit: cover;
+
+				-moz-object-position: top;
+				-webkit-object-position: top;
+				-ms-object-position: top;
+				object-position: top;
+			}
+		}
+
+
+
+		/*
+		>ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			margin-top: 0.5em;
+
+			>li {
+				margin: 0;
+				padding: 0;
+				display: flex;
+
+				&:hover {
+					background-color: #FAFAFA;
+				}
+    			
+
+				div.image {
+					max-width: 15em;
+    				overflow: hidden;
+
+					img {
+						height: 10em;
+					}
+				}
+
+				.content {
+					padding: 1em;
+				}
+			}			
+		}
+		*/
+	}
+
+
+/*
+// main
+	#main {
+		overflow: hidden;
+		padding-bottom: 2rem;
+	}
+
+
+// images
+	section.images {
+		display: flex;
+
+		a.image {
+			margin: auto ;
+
+			img {
+				max-width: 100%;				
+			}
+		}
+	}
+	*/

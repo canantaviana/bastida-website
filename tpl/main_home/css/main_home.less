@@ -1,0 +1,38 @@
+// Variables
+	@assets_path: "../../assets";
+	@fonts_path: "@{assets_path}/fonts";
+
+// Usage library
+	//@import "@{assets_path}/css/library.less";
+
+
+
+
+	.top_bar {
+		display: none;
+	}
+
+
+
+// area_header
+	.area_header {
+
+		&:not(#first) {
+			background-color: #1b170e;
+			h2 {
+				color: #ffffff !important;
+				font-weight: 900;
+    			letter-spacing: 0.075em;
+    			text-transform: uppercase;
+			}			
+		}		
+	}
+
+
+// spotlight
+	.spotlight {
+
+		&.style1.orient-right.white {
+			background-color: #fbfbfb;
+		} 
+	}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["main_home.js"],"names":[],"mappings":"AAAA","sourcesContent":["\"use strict\";\n\n\n/*\nsetTimeout(function(){\n\n\tconst bg = document.querySelector(\".bg\")\n\tif (bg) {\n\t\tbg.classList.add(\"bg2\")\n\t}\t\n\n},4000)\n*/"]}
