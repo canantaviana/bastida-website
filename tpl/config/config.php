@@ -9,7 +9,7 @@
 
 
 // source data api
-	$source_data_api = 'remote'; // remote , local
+$environment = 'pre'; // pre , prod
 
 
 
@@ -18,12 +18,12 @@
 	define('WEB_ENTITY_LABEL' ,'Bastida de les Alcusses');
 
 // db . force use this db instead of default (usefull for multiple pubolications)
-	define('WEB_DB' ,'web_mupreva');
+	define('WEB_DB' ,'web_tangible_heritage');
 
 // site config
 
 	// __web_base_url__ . absolute url base to target web. Used to build absolute calls to elements
-		define('__WEB_BASE_URL__', ($source_data_api==='remote')
+		define('__WEB_BASE_URL__', ($environment==='prod')
 			? 'http://www.mupreva.org'
 			: 'http://'.$_SERVER['HTTP_HOST']);
 
@@ -54,9 +54,9 @@
 // api config
 
 	// json_trigger_url data source url
-		define('JSON_TRIGGER_URL', ($source_data_api==='remote')
-			? __WEB_BASE_URL__.'/dedalo/lib/dedalo/publication/server_api/v1/json/'
-			: 'http://'.$_SERVER['HTTP_HOST'].'/dedalo/lib/dedalo/publication/server_api/v1/json/');
+		define('JSON_TRIGGER_URL', ($environment==='prod')
+			? 'https://dedalo.mupreva.org/dedalo6/publication/server_api/v1/json/'
+			: 'https://pre-dedalo.mupreva.org/dedalo6-pre/publication/server_api/v1/json/');
 
 	// json_web_data colector. PHP version http request manager (via CURL)
 		include(__WEB_BASE_PATH__ .'/'. WEB_APP_DIR . '/api/class.json_web_data.php');
@@ -99,15 +99,15 @@
 
 
 // debug . Show / hide debug messages
-	$SHOW_DEBUG = false;
+	$SHOW_DEBUG = true;
 	define('SHOW_DEBUG', $SHOW_DEBUG);
 
 
 
 // web config
-	define('WEB_MENU_TABLE', 		'ts_web_yacimientos');
-	define('WEB_MENU_SECTION_TIPO', 'mupreva2564');
-	define('WEB_MENU_PARENT', 		'mupreva2564_39');
+	define('WEB_MENU_TABLE', 		'ts_web_bastida');
+	define('WEB_MENU_SECTION_TIPO', 'wwwbastida1');
+	define('WEB_MENU_PARENT', 		'wwwbastida1_39');
 	define('WEB_HOME_PATH', 		'web');
 
 	define('WEB_AR_LANGS', json_encode([
