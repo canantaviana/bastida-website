@@ -18,7 +18,7 @@ $environment = 'pre'; // pre , prod
 	define('WEB_ENTITY_LABEL' ,'Bastida de les Alcusses');
 
 // db . force use this db instead of default (usefull for multiple pubolications)
-	define('WEB_DB' ,'web_tangible_heritage');
+	define('WEB_DB' ,'web_bastida_alcusses');
 
 // site config
 
@@ -107,7 +107,7 @@ $environment = 'pre'; // pre , prod
 // web config
 	define('WEB_MENU_TABLE', 		'ts_web_bastida');
 	define('WEB_MENU_SECTION_TIPO', 'wwwbastida1');
-	define('WEB_MENU_PARENT', 		'wwwbastida1_39');
+	define('WEB_MENU_PARENT', 		'wwwbastida1_1');
 	define('WEB_HOME_PATH', 		'web');
 
 	define('WEB_AR_LANGS', json_encode([
@@ -157,20 +157,20 @@ $environment = 'pre'; // pre , prod
 		'term_id' 		=> 'term_id',
 		'term'			=> 'term',
 		'web_path'		=> 'web_path',
-		'title'			=> 'titulo', // before standard (compatibility)
+		'title'			=> 'title',
 		'parent' 		=> 'parent',
 		'childrens' 	=> 'childrens',
 		'web_path' 		=> 'web_path',
 
 		'template_name' => 'template_name',
-		'entradilla' 	=> 'entradilla',
-		'cuerpo' 		=> 'cuerpo',
+		'entradilla' 	=> 'abstract',
+		'cuerpo' 		=> 'body',
 		'norder'		=> 'norder',
-		'imagen'		=> 'imagen',
+		'imagen'		=> 'image',
 		//'direccion' 	=> 'direccion',
 		//'telf' 			=> 'telf',
 		//'email'			=> 'email'
-		'actividades'			=> 'actividades',
+		/*'actividades'			=> 'actividades',
 		'excavaciones'			=> 'excavaciones',
 		'catalogo'				=> 'catalogo',
 		'yacimientos'			=> 'yacimientos',
@@ -182,7 +182,7 @@ $environment = 'pre'; // pre , prod
 		'galeria_digital'		=> 'galeria_digital',
 		'galeria_ephemera'		=> 'galeria_ephemera',
 		'galeria_video'			=> 'galeria_video',
-		'galeria_audio'			=> 'galeria_audio'
+		'galeria_audio'			=> 'galeria_audio'*/
 	]));
 
 
