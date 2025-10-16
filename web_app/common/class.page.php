@@ -335,7 +335,19 @@ class page {
                         "table": "image",
                         "colname": "footprint"
                     }
-                }
+                },
+				{"type":"custom","colname":"excavaciones","table":"excavaciones"},
+				{"type":"custom","colname":"catalogo","table":"catalogo"},
+				{"type":"custom","colname":"yacimientos","table":"yacimientos"},
+				{"type":"custom","colname":"contextos","table":"contextos"},
+				{"type":"custom","colname":"espacios","table":"espacios"},
+				{"type":"custom","colname":"temas","table":"tematicas"},
+				{"type":"custom","colname":"publicaciones","table":"publicaciones"},
+				{"type":"custom","colname":"publicaciones_externas","table":"publicaciones_externas"},
+				{"type":"custom","colname":"galeria_digital","table":"galeria_digital"},
+				{"type":"custom","colname":"galeria_ephemera","table":"galeria_ephemera"},
+				{"type":"custom","colname":"galeria_video","table":"galeria_video"},
+				{"type":"custom","colname":"galeria_audio","table":"galeria_audio"}
             ]
         }';
     }
@@ -1061,10 +1073,10 @@ class page {
 			# Direct value
 			$ar_reference_value = $value;
 
-		}else{
+		} else {
 
 			# JSON array of element pointing to another table (target)
-			if ($value==='[]' || !$ar_value=json_decode($value)) {
+			if ($value=== null || $value==='[]' || !$ar_value=json_decode($value)) {
 				return $ar_reference_value;
 			}
 			#dump($column_obj->target->colname, '$column_obj->target->colname ++ '.to_string($column_obj->target->table));
