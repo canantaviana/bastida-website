@@ -55,7 +55,22 @@ class page {
 	public $area_section_id;
 	public $lang_from_path;
 
+	public $global_page = null;
 
+	public $term_id = null;
+
+    // menu_tree_html
+    public $menu_tree_html;
+
+    // footer_html
+    public $footer_html;
+
+	public $nav_html;
+
+	public $header_html;
+
+    // menu_tree
+    public $menu_tree;
 
 	/**
 	* __CONSTRUCT
@@ -66,7 +81,9 @@ class page {
 	public function __construct( $reference_page=false ) {
 
 		// web_fields_map set from config
-			self::$web_fields_map = json_decode(WEB_FIELDS_MAP);
+        self::$web_fields_map = (is_string(WEB_FIELDS_MAP))
+            ? json_decode(WEB_FIELDS_MAP)
+            : WEB_FIELDS_MAP;
 
 		// default title
 			$this->page_title = 'Untitled';
@@ -74,8 +91,8 @@ class page {
 		// init
 			if ($reference_page!==false) {
 				// use reference page to get already calculated data. inject data
-					$this->data_combi 	= $reference_page->data_combi;
-					$this->template_map = (array)$this->get_template_map();
+				$this->data_combi 	= $reference_page->data_combi;
+				$this->template_map = (array)$this->get_template_map();
 
 				$this->status = 'initied';
 			}
@@ -248,21 +265,34 @@ class page {
 			// menu_items
 
 			$menu_items = $this->data_combi[1]->result;
-			$global_page = array_reduce($menu_items, function($carry, $item){
+			$global_page = array_find($menu_items, function ($item) {
+            	return ($item->term_id === WEB_MENU_PARENT);
+        	});
+
+			/*$global_page = array_reduce($menu_items, function($carry, $item){
 				if ($item->term_id===WEB_MENU_PARENT) {
 					return $item;
 				}
 				return $carry;
-			});
+			});*/
 			// template_items
 			$template_items = $this->data_combi[0]->result;
-			$global_template = array_reduce($template_items, function($carry, $item) use($global_page) {
+//var_dump($template_items);
+			/*$global_template = array_reduce($template_items, function($carry, $item) use($global_page) {
 				if ($item->name===$global_page->template_name) {
 					return $item;
 				}
 				return $carry;
-			});
+			});*/
+			$global_template = array_find($template_items, function ($item) use ($global_page) {
+            	return ($item->name === $global_page->template_name);
+        	});
+
 			// set
+			if ($global_template->data == 'null' || $global_template->data == '{}') {
+            	$global_template->data = $this->defaultTemplateData($global_template);
+        	}
+
 			$global_page->template 	= json_decode($global_template->data);
 			$this->global_page 		= $global_page;
 
@@ -270,6 +300,37 @@ class page {
 		return $this->data_combi;
 	}//end get_page_data_combi
 
+
+    private function defaultTemplateData($value) {
+        $template_name = $value->name;
+        return '{
+            "id": "'.$template_name.'",
+            "template": "'.$template_name.'",
+            "table": "ts_web_mupreva",
+            "detail": [
+                {
+                    "type": "title",
+                    "colname": "title"
+                },
+                {
+                    "type": "abstract",
+                    "colname": "abstract"
+                },
+                {
+                    "type": "body",
+                    "colname": "body"
+                },
+                {
+                    "type": "image",
+                    "colname": "image",
+                    "target": {
+                        "table": "image",
+                        "colname": "image"
+                    }
+                }
+            ]
+        }';
+    }
 
 
 	/**
@@ -308,14 +369,18 @@ class page {
 				$data = array_reduce($this->data_combi, function($carry, $item){
 					return ($item->id==='templates_all') ? $item : $carry;
 				});
-				if($data->result!==false) foreach ($data->result as $key => $value) {
-					$current_template 	= json_decode($value->data);
-					# Convert always to array allow use múltiple maps in a one file/record
-					$ar_current_template = is_array($current_template) ? $current_template : array($current_template);
-					foreach ($ar_current_template as $element) {
-						$template_map[] = $element;
-					}
-				}
+                if ($data->result !== false) foreach ($data->result as $key => $value) {
+
+                    if ($value->data == 'null' || $value->data == '{}') {
+                        $value->data = $this->defaultTemplateData($value);
+                    }
+                    $current_template = json_decode($value->data);
+                    // Convert always to array allow use multiple maps in a one file/record
+                    $ar_current_template = is_array($current_template) ? $current_template : array($current_template);
+                    foreach ($ar_current_template as $element) {
+                        $template_map[] = $element;
+                    }
+                }
 				break;
 		}
 		#dump($template_map, ' template_map ++ '.to_string());
@@ -714,7 +779,10 @@ class page {
 
 			// sort by norder asc
 				usort($items, function($a, $b){
-					return (int)$a->norder > (int)$b->norder;
+					if ((int)$a->norder > (int)$b->norder) {
+						return 1;
+					}
+					return 0;
 				});
 
 			// iterate items from filter
@@ -911,10 +979,10 @@ class page {
 			# Direct value
 			$image_url = $value;
 
-		}else{
+		} else {
 
 			# JSON array of element pointing to another table (target)
-			if ($value==='[]' || !$ar_value=json_decode($value)) {
+			if ($value == null || $value==='[]' || !$ar_value=json_decode($value)) {
 				return $image_url;
 			}
 
@@ -1384,6 +1452,9 @@ class page {
 			}
 			$template_name = $template_map->template;
 		}
+		$template_name = $this->templateConvert(str_replace(' ', '_', strtolower($this->remove_accents(trim($template_name)))));
+
+
 		#dump( $template_name, ' template_name ++ '.to_string($mode));
 		#dump($this, ' this ++ '.to_string());
 
@@ -1529,62 +1600,6 @@ class page {
 			}else{
 				$element_object = reset($element_objects);
 			}
-
-
-		// reduce array template_map
-			/*
-			$element_object = array_reduce($template_map, function($carry, $item) use($type, $custom_filter){
-				#dump($item, ' item ++ '.to_string($type)." - ".json_encode($item->type===$type));
-				if($item->type===$type) {
-					#dump($item, ' match item ++ type: '.to_string($type));
-
-					if (!empty($custom_filter)) {
-						// additional filter check using '$custom_filter' array like ['colname'=>'logos']
-							foreach ($custom_filter as $property_name => $property_value) {
-								if (property_exists($item, $property_name) && $item->{$property_name}===$property_value) {
-									return $item;
-								}
-							}
-					}else{
-						// default case. only filtered by type
-							return $item;
-					}
-				}
-				return $carry;
-			});
-			*/
-
-
-		/* OLD way array filter
-			$ar_elements = array_filter(
-					$template_map,
-					function ($template_map) use($type, $custom_filter) {
-						if (!empty($custom_filter)) {
-
-							$find = ($template_map->type === $type);
-							foreach ($custom_filter as $key => $value) {
-								if (!property_exists($template_map, $key) || $template_map->{$key}!=$value) {
-									$find = false;
-									dump($key, ' custom_filter ++ '.to_string($value));
-									break;
-								}
-
-							}
-							$filter = $find;
-						}else{
-							$filter = ($template_map->type === $type);
-						}
-						return $filter;
-					}
-			);
-			#dump($ar_elements, ' ar_elements ++ '.to_string());
-
-
-			$element_object = reset($ar_elements); //isset($ar_elements[$key]) ? $ar_elements[$key] : null;
-			#if ($type==="image") {
-			#	dump($ar_elements, ' ar_elements ++ custom_filter: '.to_string($custom_filter));
-			#}
-			*/
 
 		$element_value = isset($element_object->value) ? $element_object->value : '';
 
@@ -1733,6 +1748,35 @@ class page {
 		return $items;
 	}//end get_children
 
+    protected function remove_accents($str) {
+        $accents = [
+            'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A',
+            'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a',
+            'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
+            'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I',
+            'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
+            'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O',
+            'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o',
+            'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U',
+            'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u',
+            'Ñ' => 'N', 'ñ' => 'n',
+            'Ç' => 'C', 'ç' => 'c'
+        ];
 
+        return strtr($str, $accents);
+    }
 
+	protected function templateConvert($template_name) {
+		$convert = [
+
+			'error' => 'error',
+			'bastida_faqs' => 'faqs',
+			'pagina_generica' => 'generic',
+			'bastia_images' => 'images',
+			'portada' => 'main_home',
+		];
+
+		return isset($convert[$template_name]) ? $convert[$template_name] : $template_name;
+	}
 }//end class page

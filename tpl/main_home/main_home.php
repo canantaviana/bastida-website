@@ -7,7 +7,8 @@
 	$ar_image  		= $this->get_element_from_template_map('image', $template_map->{$mode});
 	shuffle($ar_image);
 	$home_image 	= __WEB_BASE_URL__ . reset($ar_image);
-	$home_image 	= str_replace('1.5MB', 'modificada', $home_image);
+	//$home_image 	= str_replace('1.5MB', 'modificada', $home_image);
+	$home_image 	= $home_image;
 
 	$areas_list = yacimientos::get_home_areas_list();
 	#dump($areas_list, ' areas_list ++ '.to_string()); die();

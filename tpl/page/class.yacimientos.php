@@ -19,7 +19,7 @@ class yacimientos {
 				$options->lang 			= WEB_CURRENT_LANG_CODE;
 				$options->order 		= 'norder ASC';
 				$options->resolve_portals_custom = [
-					'imagen' => 'digital'
+					'image' => 'image'
 				];
 				$response = json_web_data::get_data($options);
 				#dump($response, ' response ++ '.to_string());
@@ -28,18 +28,17 @@ class yacimientos {
 				return (object)[
 					'section_id' 	=> $item->section_id,
 					'term' 			=> $item->term,
-					'title' 		=> $item->titulo,
-					'abstract' 		=> $item->entradilla,
+					'title' 		=> $item->title,
+					'abstract' 		=> $item->abstract,
 					'web_path' 		=> $item->web_path,
 					'childrens' 	=> [],
-					'image' 		=> !empty($item->imagen) ? __WEB_BASE_URL__ . reset($item->imagen)->imagen : null
+					'image' 		=> !empty($item->image) ? __WEB_BASE_URL__ . reset($item->image)->image : null
 				];
 			};
 
 			$areas_list = [];
 			#foreach ($this->menu_tree as $item) {
 			foreach ($response->result as $key => $item) {
-				
 				if ($item->parent!==WEB_MENU_PARENT || $item->web_path==='main_home') continue;				
 
 				$element = $create_item($item);

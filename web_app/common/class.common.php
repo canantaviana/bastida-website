@@ -582,6 +582,21 @@ function encodeURIComponent($str) {
 	return strtr(rawurlencode($str), $revert);
 }
 
+/**
+ * ARRAY_FIND
+ * Equivalent of javascript find
+ */
+function array_find($xs, $f)
+{
 
+    if (is_array($xs)) {
+        foreach ($xs as $x) {
+            if (call_user_func($f, $x) === true)
+                return $x;
+        }
+    }
+
+    return null;
+}//end find
 
 ?>

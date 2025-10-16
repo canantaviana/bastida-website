@@ -24,8 +24,8 @@ $environment = 'pre'; // pre , prod
 
 	// __web_base_url__ . absolute url base to target web. Used to build absolute calls to elements
 		define('__WEB_BASE_URL__', ($environment==='prod')
-			? 'http://www.mupreva.org'
-			: 'http://'.$_SERVER['HTTP_HOST']);
+			? 'https://dedalo.mupreva.org/'
+			: 'https://pre-dedalo.mupreva.org/');
 
 	// media base url
 		define('__WEB_MEDIA_BASE_URL__', 'http://www.mupreva.org');
