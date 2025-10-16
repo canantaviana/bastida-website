@@ -327,6 +327,14 @@ class page {
                         "table": "image",
                         "colname": "image"
                     }
+                },
+                {
+                    "type": "reference",
+                    "colname": "image",
+                    "target": {
+                        "table": "image",
+                        "colname": "footprint"
+                    }
                 }
             ]
         }';
