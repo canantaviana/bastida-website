@@ -1,0 +1,28 @@
+<?php
+# REQUIRED FILES
+$base_path = dirname(dirname(__FILE__));
+$cwd        = basename($base_path); # Current dir name
+
+# Current controller add
+require($base_path . '/' . $cwd . '.php');
+?>
+
+<!-- Wrapper -->
+<div id="wrapper" class="wrapper style2 align-left">
+
+        <!-- item -->
+        <div id="item" class="item"></div>
+
+        <?php echo $this->footer_html ?>
+</div>
+
+<?php echo $this->get_header_links('js') ?>
+<script>
+    dom_ready(function() {
+        item.init({
+            table: '<?php echo $table ?>',
+            section_id: <?php echo (int)$section_id ?>,
+            target: document.getElementById("item")
+        })
+    })
+</script>

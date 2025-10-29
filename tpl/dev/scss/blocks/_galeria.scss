@@ -1,0 +1,113 @@
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--colWidth), 1fr));
+    column-gap: var(--space-m);
+    row-gap: var(--space-l);
+    li {
+        padding-left: 0 !important;
+        margin-top: 0 !important;
+        &::before {
+            display: none !important;
+        }
+    }
+    a {
+        display: block;
+        &:hover,
+        &:focus {
+            img {
+                opacity: 0.85;
+            }
+        }
+    }
+    figure,
+    div {
+        img {
+            object-fit: cover;
+            width: 100%;
+            transition: opacity 125ms ease-in;
+        }
+    }
+    &--92x92 {
+        --colWidth: 92px;
+        gap: var(--space-xs);
+        img {
+            aspect-ratio: 1/1;
+        }
+    }
+    &--170x240 {
+        --colWidth: 170px;
+        img {
+            height: 240px;
+        }
+    }
+    &--180x150 {
+        --colWidth: 180px;
+        img {
+            height: 150px;
+        }
+    }
+    &--185x185 {
+        --colWidth: 185px;
+        column-gap: var(--space-s);
+        img {
+            aspect-ratio: 1/1;
+        }
+    }
+    &--238x337 {
+        --colWidth: 238px;
+        column-gap: var(--space-s);
+        img {
+            height: 337px;
+        }
+    }
+    &--242x242 {
+        --colWidth: 242px;
+        img {
+            aspect-ratio: 1/1;
+        }
+    }
+    &--242x342 {
+        --colWidth: 242px;
+        img {
+            height: 342px;
+        }
+    }
+    &--293x293 {
+        --colWidth: 293px;
+        img {
+            aspect-ratio: 1/1;
+        }
+    }
+    &--366x366 {
+        --colWidth: 366px;
+        row-gap: var(--space-2xl);
+        img {
+            aspect-ratio: 1/1;
+        }
+    }
+    &--380x250 {
+        --colWidth: 380px;
+        row-gap: var(--space-2xl);
+        img {
+            height: 250px;
+        }
+    }
+    &--variable {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        row-gap: var(--space-l);
+        li {
+            margin-top: 0 !important;
+            padding-left: 0 !important;
+            &::before {
+                display: none !important;
+            }
+        }
+        img {
+            height: 200px;
+            // height: auto;
+            // max-height: 200px;
+        }
+    }
+}

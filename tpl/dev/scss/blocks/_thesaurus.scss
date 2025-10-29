@@ -1,0 +1,326 @@
+// Thesaurus search form
+
+// Millora visualment la càrrega del form, perquè no es produeixi layout shift
+body:not(:has(.tree_wrapper)) {
+    .form.wrapper {
+        opacity: 0;
+    }
+}
+body:has(.tree_wrapper) main .form {
+    .form-inline {
+        display: flex;
+        gap: var(--space-m);
+        @include tablet {
+            padding-left: var(--space-3xl) !important;
+            padding-right: var(--space-3xl) !important;
+        }
+        .global_search_container {
+            flex-grow: 1;
+        }
+    }
+
+    // Fix button {
+    input.button {
+        border-color: $primary;
+        &:hover,
+        &:focus {
+            border-color: #000;
+        }
+    }
+}
+
+// tree_wrapper
+
+// img preload
+html {
+    background: url("img/icon-close-subtree.svg") no-repeat -9999px -9999px;
+}
+.tree_wrapper {
+    @include desktop {
+        width: 75%;
+    }
+    @include widescreen {
+        width: 60%;
+    }
+
+    // all levels
+    .hide {
+        display: none !important;
+    }
+    p.definition {
+        padding: var(--space-s);
+    }
+    .grouped_children {
+        display: flex;
+        align-items: center;
+        gap: var(--space-s);
+        padding: var(--space-xs) var(--space-s);
+        &:has(>.btn_relations) {
+            flex-wrap: wrap;
+        }
+        > .arrow {
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        button {
+            flex-shrink: 0;
+            border: 0;
+            background-color: transparent;
+            padding: 0;
+            cursor: pointer;
+        }
+        > .btn_scope_note,
+        > .btn_relations,
+        > .btn_chain {
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center center;
+            width: 20px;
+            height: 20px;
+            &:active {
+                opacity: 0.5;
+            }
+            &.open {
+                // opacity: 0.5;
+                background-image: url("img/icon-x.svg");
+                background-size: 60%;
+            }
+        }
+        > .btn_scope_note {
+            background-image: url("img/icon-info.svg");
+        }
+        > .btn_relations {
+            background-image: url("img/icon_eye_color.svg");
+        }
+        > .btn_chain {
+            background-image: url("img/icon_link.svg");
+        }
+    }
+    .scope_note {
+        font-size: var(--step--1);
+        background-color: $grey-light;
+        padding: var(--space-xs) var(--space-s);
+
+        // hide double <br> in text
+        br + br {
+            display: none;
+        }
+    }
+    .term.hilite {
+        color: #fff;
+        background-color: $primary;
+        padding: 0.15em;
+        padding-left: 0.35em;
+        padding-right: 0.35em;
+        border-radius: 0.15em;
+    }
+
+    // top level
+    > .tree_node {
+        > .grouped_children {
+            border-bottom: 2px solid #000;
+            padding: var(--space-s);
+
+            button {
+                flex-shrink: 0;
+            }
+
+            > .term {
+                font-weight: 600;
+                margin-right: auto;
+                &:has(+ .nd) {
+                    margin-right: 0;
+                }
+                small {
+                    font-family: monospace;
+                    font-size: 11px;
+                    letter-spacing: unset;
+                    color: #c0c0c0;
+                }
+            }
+
+            > .nd {
+                font-size: var(--step--1);
+                color: $grey;
+                margin-right: auto;
+            }
+
+            > .arrow {
+                background-image: url("img/ico-fletxa-desplegar.svg");
+                width: 20px;
+                height: 20px;
+                &.open {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        > .branch {
+            display: block;
+            flex-basis: 100%;
+        }
+    }
+
+    // second level
+    > .tree_node > .branch > .tree_node {
+        > .grouped_children {
+            &:has(+ .branch:not(.hide)),
+            &:has(+ img + .branch:not(.hide)) {
+                color: #fff;
+                background-color: $primary;
+                .btn_chain {
+                    filter: invert(1);
+                }
+            }
+            &:hover {
+                background-color: $primary-light;
+            }
+            > .term {
+                font-weight: 600;
+            }
+            > .arrow {
+                background-image: url("img/icon-open-subtree.svg");
+                width: 22px;
+                height: 22px;
+                order: -1;
+                &.open {
+                    // transform: rotate(.125turn);
+                    // filter: brightness(100) grayscale(1);
+                    background-image: url("img/icon-close-subtree.svg");
+                }
+            }
+            &:has(>.arrow.open) > .term a {
+                color: #fff;
+            }
+        }
+    }
+
+    // third level
+    > .tree_node > .branch > .tree_node > .branch {
+        background: $grey-light;
+        padding: var(--space-s);
+        > .tree_node {
+            > .grouped_children {
+                position: relative;
+                &::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    left: var(--space-s);
+                    right: var(--space-s);
+                    bottom: 0;
+                    height: 1px;
+                    background-color: $grey-lighter;
+                }
+                &:has(+ .branch:not(.hide)),
+                &:has(+ .scope_note + .branch:not(.hide)) {
+                    &::after {
+                        display: none;
+                    }
+                }
+                > .term {
+                    font-weight: 600;
+                    margin-right: auto;
+                }
+                > .arrow {
+                    background-image: url("img/ico-fletxa-desplegar.svg");
+                    transform: rotate(-90deg);
+                    width: 20px;
+                    height: 20px;
+                    &.open {
+                        transform: none;
+                    }
+                }
+            }
+            > .branch:not(.hide) {
+                position: relative;
+                padding-bottom: var(--space-xs);
+                &::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    left: var(--space-s);
+                    right: var(--space-s);
+                    bottom: 0;
+                    height: 1px;
+                    background-color: $grey-lighter;
+                }
+            }
+            &:last-child {
+                > .grouped_children,
+                > .branch:not(.hide) {
+                    &::after {
+                        display: none;
+                    }
+                }
+                > .branch:not(.hide) {
+                    padding-bottom: 0;
+                }
+            }
+        }
+        .scope_note {
+            font-size: var(--step--2);
+            background-color: $grey-lighter;
+            padding: var(--space-2xs) var(--space-xs);
+            margin: 0 var(--space-s) var(--space-xs) var(--space-s);
+        }
+    }
+
+    // fourth level
+    > .tree_node > .branch > .tree_node > .branch > .tree_node > .branch {
+        > .tree_node {
+            > .grouped_children {
+                > .term {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    // rest of levels
+    > .tree_node > .branch > .tree_node > .branch > .tree_node > .branch .tree_node {
+        .grouped_children {
+            gap: var(--space-2xs);
+            padding: var(--space-3xs) var(--space-s);
+            > .term {
+                font-size: var(--step--1);
+            }
+            > .arrow {
+                background-image: url("img/ico-fletxa-desplegar.svg");
+                background-size: 60%;
+                background-position: 50%;
+                transform: rotate(-90deg);
+                width: 20px;
+                height: 20px;
+                &.open {
+                    transform: none;
+                }
+            }
+        }
+        .branch {
+            padding-left: var(--space-l);
+        }
+        .scope_note {
+            margin-top: var(--space-2xs);
+        }
+    }
+
+}
+
+.relations_container {
+    flex-basis: 100%;
+    .relation_item {
+        cursor: pointer;
+        &:hover,
+        &:focus {
+            img {
+                opacity: .85;
+            }
+        }
+    }
+}
+
+.more_node:last-child {
+    grid-column: 1 / -1;
+    margin: var(--space-s) 0 var(--space-m) 0;
+}

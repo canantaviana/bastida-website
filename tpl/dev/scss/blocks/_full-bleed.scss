@@ -1,0 +1,19 @@
+// ample de punta a punta
+.full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+    &--img {
+        padding-top: 0;
+        padding-bottom: 0;
+        body:not(.has-side-col) & {
+            img {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                max-width: none;
+                display: block;
+            }
+        }
+    }
+}
