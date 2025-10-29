@@ -46,6 +46,13 @@ $environment = 'pre'; // pre , prod
 		define('__WEB_TEMPLATE_WEB__' , __WEB_ROOT_WEB__  .'/tpl' );
 		define('__WEB_TEMPLATE_PATH__', __WEB_BASE_PATH__ .'/tpl');
 
+		define(
+			'__WEB_MEDIA_ENGINE_URL__',
+			($environment === 'prod')
+				? 'https://dedalo.mupreva.org'
+				: 'https://pre-dedalo.mupreva.org'
+		);
+
 	// version
 		include(__WEB_TEMPLATE_PATH__ . '/version.inc');
 

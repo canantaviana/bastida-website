@@ -558,8 +558,138 @@ var page = {
 			}
 
 		return scrollbar
-	}//end adjust_footer_position
+	},//end adjust_footer_position
 
+
+
+    /**
+    * SECTION_TIPO_TO_TEMPLATE
+    */
+    section_tipo_to_template: function (section_tipo) {
+        let template
+        switch (section_tipo) {
+            case 'tch100':
+                template = 'img';
+                break;
+            case 'tch1':
+                template = 'cat';
+                break;
+            case 'tchi1':
+                template = 'imm';
+                break;
+            case 'tch300':
+                template = 'doc';
+                break;
+            case 'rsc205':
+                template = 'pub';
+                break;
+        }
+        return template
+    },//end section_tipo_to_template
+
+    /**
+    * TLD_TO_TEMPLATE
+    */
+    tld_to_template: function (tld) {
+        let template
+        switch (tld) {
+            case 'technique1':
+                template = 'tec';
+                break;
+            case 'ts1':
+                template = 'tem';
+                break;
+            case 'dc1':
+                template = 'cro';
+                break;
+            case 'material1':
+                template = 'mat';
+                break;
+            case 'object1':
+                template = 'obj';
+                break;
+            case 'ubication1':
+                template = 'top';
+                break;
+        }
+        return template
+    },//end tld_to_table
+
+    /**
+    * TLD_TO_TABLE
+    */
+    tld_to_table: function (tld) {
+        let template
+        switch (tld) {
+            case 'technique1':
+                template = 'ts_technique';
+                break;
+            case 'ts1':
+                template = 'ts_thematic';
+                break;
+            case 'dc1':
+                template = 'ts_chronological';
+                break;
+            case 'material1':
+                template = 'ts_material';
+                break;
+            case 'object1':
+                template = 'ts_object';
+                break;
+            case 'ubication1':
+                template = 'ts_ubication';
+                break;
+        }
+        return template
+    },//end tld_to_table
+
+    get_translated_table: function (type) {
+        const typesDictionary = {
+            tch100: tstring.images,
+            tch1: tstring.objetos,
+            tchi1: tstring.immovables_title,
+            tch300: tstring.documents,
+        }
+
+        return typesDictionary[type] || type;
+    },
+
+
+    /**
+    * OPEN_PLAYER_WITH_OVERLAY
+    * Create and open video player for given url
+    * @return promise
+    */
+    open_player_with_overlay: function (container, element_player) {
+
+        const js_promise = new Promise(function (resolve) {
+
+            const wrapper = container.querySelector(".player_wrapper") || common.create_dom_element({
+                element_type: "div",
+                class_name: "player_wrapper",
+                parent: container
+            })
+
+            // clean wrapper
+            while (wrapper.hasChildNodes()) {
+                wrapper.removeChild(wrapper.firstChild);
+            }
+
+            const overlay = common.create_dom_element({
+                element_type: "div",
+                class_name: "overlay",
+                parent: wrapper
+            })
+            overlay.addEventListener("click", function () {
+                wrapper.remove()
+            })
+
+            // player
+            wrapper.appendChild(element_player)
+
+            resolve(wrapper)
+        })
+    },//end open_player_with_overlay
 
 
 }//end page

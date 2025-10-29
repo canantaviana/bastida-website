@@ -893,9 +893,170 @@ var common = {
 		});
 
 		return true
-	}//end download_item
+	},//end download_item
+
+    /**
+    * IS_NODE
+    * Check if value is a DOM node
+    * @return bool
+    */
+    is_node: function (element) {
+        if (typeof element !== 'undefined' && (element instanceof HTMLElement || element.nodeType)) {
+            return true
+        }
+        return false
+    },//end is_node
+
+    /**
+    * IS_ELEMENT_IN_VIEWPORT
+    * Check if given element node is in page viewport
+    */
+    is_element_in_viewport: function (el) {
+
+        const rect = el.getBoundingClientRect();
+
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    },//end is_element_in_viewport
+
+    /**
+    * IS_ELEMENT_TOP_IN_VIEWPORT
+    * Check if given element node top is in page viewport
+    */
+    is_element_top_in_viewport: function (el) {
+
+        const rect = el.getBoundingClientRect();
+
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    },
+
+    /**
+    * LANG_CODE_TO_TLD2
+    * Converts Dédalo lang codes like 'lg-eng' to tld2 ISO 639-1 codes like 'en'
+    * @see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+    */
+    lang_code_to_tld2: function (lang_code) {
+
+        let tld2
+
+        switch (lang_code) {
+            case 'lg-spa': tld2 = 'es'; break;
+            case 'lg-eng': tld2 = 'en'; break;
+            case 'lg-vlca': tld2 = 'ca'; break;
+            case 'lg-fra': tld2 = 'fr'; break;
+            case 'lg-ell': tld2 = 'el'; break;
+            case 'lg-deu': tld2 = 'de'; break;
+            case 'lg-por': tld2 = 'pt'; break;
+            case 'lg-eus': tld2 = 'eu'; break;
+            case 'lg-ara': tld2 = 'ar'; break;
+            default:
+                tld2 = 'lang_code';
+                console.warn("Impossible to convert lang_code to tld2 ISO 639-1 :", lang_code);
+        }
+
+        return tld2
+    },//end lang_code_to_tld2
 
 
+
+    is_object: function (current_var) {
+        return (typeof current_var === 'object' && current_var !== null)
+    },//end is_object
+
+
+
+    is_array: function (current_var) {
+        return Array.isArray(current_var)
+    },//end is_array
+
+	get_today_date: function () {
+
+        const dt = new Date
+
+        const day = dt.getDate().toString().padStart(2, '0')
+        const month = (dt.getMonth() + 1).toString().padStart(2, '0')
+        const year = dt.getFullYear().toString().padStart(4, '0')
+        const hours = dt.getHours().toString().padStart(2, '0')
+        const minutes = dt.getMinutes().toString().padStart(2, '0')
+        const seconds = dt.getSeconds().toString().padStart(2, '0')
+
+        const dformat = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`
+
+        return dformat
+    },//end get_today_date
+
+
+
+    uniq_fast: function (a) {
+
+        const seen = {};
+        const out = [];
+        let len = a.length;
+        let j = 0;
+        for (let i = 0; i < len; i++) {
+            const item = a[i];
+            if (seen[item] !== 1) {
+                seen[item] = 1;
+                out[j++] = item;
+            }
+        }
+
+        return out;
+    },//end uniq_fast
+
+
+
+    /**
+     * Shuffles array in place. ES6 version
+     * @param {Array} a items An array containing the items.
+     */
+    shuffle: function (a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    },//end shuffle
+
+
+    spinner: function(target) {
+        const spinner = htmlTemplate(`
+            <div class="has-text-centered">
+                <span class="loader"></span>
+            </div>
+        `)[0];
+        target.appendChild(spinner);
+        return spinner;
+    },
+
+    convertText: function(input) {
+        var output = input.replaceAll('&nbsp;', '');
+        output = output.replace(/<br>\s*&nbsp;\s*<br>/g, '<br>');
+        output = output.replace(/<br>\s*<br>/g, '<br>');
+        output = output.replace(/<br>\s*/g, '<br>');
+        output = output.replace(/<br>/g, '</p><p>');
+        output = `<p>${output}</p>`;
+        output = output.replaceAll('<p>\u00A0</p>', '');
+        output = output.replaceAll('<li>\u00A0</li>', '');
+        //treure br a l'inici del blockquote
+        output = output.replace(/<blockquote>\s*<br>/g, '<blockquote>');
+
+        output = output.replaceAll('../../../media', page_globals.__WEB_MEDIA_BASE_URL__ + '/dedalo/media')
+
+        output = output.replaceAll('background-color:hsl(0, 75%, 60%);', 'background-color:hsl(0,75%,60%);')
+
+        output = output.replace(
+            /<a href="(.*?)"><span style="(.*?)">(.*?)<\/span><\/a>/g,
+            '<span style="$2"><a href="$1">$3</a></span>'
+        );
+        return output;
+    }
 
 }//end common
 
@@ -931,3 +1092,104 @@ function ready(fn) {
 
 
 
+function htmlTemplate(html) {
+    const parser = new DOMParser();
+    const content = parser.parseFromString(html, "text/html");
+    return content.body.childNodes;
+}
+
+function appendTemplate(target, template) {
+    if (!template) {
+        return
+    }
+    template.forEach(function(elem) {
+        target.appendChild(elem);
+    });
+}
+
+function imgOriginal(url) {
+    return url;
+}
+
+function imgPdf(url) {
+    return url.replace('.pdf', '.jpg');
+}
+
+
+function getPosterframe(video_url){
+    let posterframe_url = video_url
+	posterframe_url = posterframe_url.replace(/\/404\//g, '/posterframe/')
+    posterframe_url = posterframe_url.replace(/\/720\//g, '/posterframe/')
+	posterframe_url = posterframe_url.replace(/\.mp4/g, '.jpg')
+
+    const ar_parts = posterframe_url.split("?")
+        if (typeof ar_parts[0]!=="undefined") {
+            posterframe_url = ar_parts[0]
+        }
+
+    return posterframe_url;
+}
+
+function shuffle(array) {
+    let currentIndex = array.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+      // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+      // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+}
+
+function formatDateRange(dateRange, iso3) {
+    try {
+        const iso3ToLocale = {
+            'lg-spa': 'es-ES',  // Espanyol
+            'lg-vlc': 'ca-ES',  // Valencià (utilitza català)
+            'lg-vlca': 'ca-ES',  // Valencià (utilitza català)
+            'lg-eng': 'en-US',  // Anglès
+            'lg-fra': 'fr-FR',  // Francès
+            'lg-cat': 'ca-ES',  // Català
+            'lg-deu': 'de-DE',  // Alemany
+            'lg-ita': 'it-IT',  // Italià
+            'lg-por': 'pt-PT',  // Portuguès
+            // Afegeix altres idiomes segons sigui necessari
+        };
+        const locale = iso3ToLocale[iso3.toLowerCase()] || 'en-US'; // Anglès per defecte
+        const [start, end] = dateRange.split(",").map(date => new Date(date.trim()));
+
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const formatter = new Intl.DateTimeFormat(locale, options);
+
+        return `${formatter.format(start)} - ${formatter.format(end)}`;
+    } catch (e) {
+        return null;
+    }
+}
+
+const formatDate = (dateString) => {
+    try {
+        const date = new Date(dateString); // Converteix la cadena de text a un objecte Date
+        const day = date.getDate(); // Obté el dia del mes
+        const month = date.getMonth() + 1; // Obté el mes (0-11, per això s'afegeix 1)
+        const year = date.getFullYear(); // Obté l'any
+
+        return `${day}/${month}/${year}`; // Crea el format desitjat
+    } catch (e) {
+        return null;
+    }
+};
+
+function normalitzaText(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD') // separa lletres i accents
+    .replace(/[\u0300-\u036f]/g, '') // elimina els accents
+    .replace(/[^a-z0-9\s]/g, '') // elimina caràcters especials (excepte lletres, números i espais)
+    .replace(/\s+/g, '_'); // substitueix espais per "_"
+}

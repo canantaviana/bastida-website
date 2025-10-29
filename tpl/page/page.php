@@ -27,11 +27,25 @@
 		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/assets/js/breakpoints.min.js';
 		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/assets/js/util.js';
 		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/assets/js/main.js';
+
+
 		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/assets/lib/jquery-colorbox/jquery.colorbox-min.js';
-		page::$js_ar_url[] = __WEB_ROOT_WEB__  	  . '/' . WEB_APP_DIR . '/common/js/common'.JS_SUFFIX.'.js';
+		page::$js_ar_url[] = __WEB_ROOT_WEB__ . '/' . WEB_APP_DIR . '/common/js/common'.JS_SUFFIX.'.js';
+		page::$js_ar_url[] = __WEB_ROOT_WEB__ . '/' . WEB_APP_DIR . '/factory/form_factory.js';
+		page::$js_ar_url[] = __WEB_ROOT_WEB__ . '/' . WEB_APP_DIR . '/factory/list_factory.js';
+		page::$js_ar_url[] = __WEB_ROOT_WEB__ . '/' . WEB_APP_DIR . '/factory/map_factory.js';
+		page::$js_ar_url[] = __WEB_ROOT_WEB__ . '/' . WEB_APP_DIR . '/factory/tree_factory.js';
+		page::$js_ar_url[] = __WEB_ROOT_WEB__ . '/' . WEB_APP_DIR . '/factory/timeline_factory.js';
+		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/js/app_utils-min.js';
 		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/js/page.js.php';
+		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/js/render_page.js';
+		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/js/data.js';
+		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/js/data_export.js';
 
 	
+		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/js/api.js';
+		page::$js_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/js/modules.js';
+
 	// menu tree
 		$menu_tree = $this->get_menu_tree_plain(WEB_MENU_PARENT); // 
 		#dump($menu_tree, ' menu_tree ++ '.to_string());
@@ -62,7 +76,7 @@
 					: str_replace(' Bastida', '', $menu_element->term);			
 
 				$html .= PHP_EOL . '<li role="'.$menu_element->web_path.'">';
-				if ($menu_element->web_path==='') {
+				if ($menu_element->web_path==='' || $menu_element->web_path=== null) {
 					$html .= '<a href="#" class="no_menu">'.$term.'<i class="fas fa-angle-down"></i></a>';
 				}else{
 					$web_path = ($menu_element->web_path==='main_home' && $menu_element->parent===WEB_MENU_PARENT) ? '' : $menu_element->web_path;

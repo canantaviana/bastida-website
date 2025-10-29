@@ -1,0 +1,36 @@
+# Reset folder rewrite (!) important
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*?)_([0-9]{10})\.js$ $1.js [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*?)_([0-9]{10})\.css$ $1.css [QSA,L]
+
+<filesMatch ".(ico)$">
+    Header set Cache-Control "max-age=84600, public"
+</filesMatch>
+
+<ifDefine !testserver>
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        ExpiresByType application/x-javascript "access plus 1 month"
+        ExpiresByType application/javascript "access plus 1 month"
+        ExpiresByType text/javascript "access plus 1 month"
+        ExpiresByType text/css "access plus 1 month"
+
+        # imatges
+        ExpiresByType image/gif "access plus 1 month"
+        ExpiresByType image/jpeg "access plus 1 month"
+        ExpiresByType image/webp "access plus 1 month"
+        ExpiresByType image/png "access plus 1 month"
+        ExpiresByType image/svg+xml "access plus 1 month"
+
+        #videos
+        ExpiresByType video/ogg "access plus 1 month"
+        ExpiresByType audio/ogg "access plus 1 month"
+        ExpiresByType video/mp4 "access plus 1 month"
+        ExpiresByType video/webm "access plus 1 month"
+    </IfModule>
+</ifDefine>
