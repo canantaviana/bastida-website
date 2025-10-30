@@ -163,7 +163,7 @@ var catalog = {
             self.catalog_config.ar_tables = [
                 "objects",
                 "pictures",
-                "immovables",
+                //"immovables",
                 "documents_catalog",
             ];
         }
@@ -351,14 +351,14 @@ var catalog = {
             return; // nothing to change
         }
 
-        const checkbox_immovables = self.form.node.querySelector('#checkbox_immovable');
+        /*const checkbox_immovables = self.form.node.querySelector('#checkbox_immovable');
         if (view_mode === 'timeline') {
             checkbox_immovables.setAttribute("disabled", true);
             checkbox_immovables.removeAttribute("checked");
             checkbox_immovables.checked = false;
         } else {
             checkbox_immovables.removeAttribute("disabled");
-        }
+        }*/
 
         const previous_view_mode = JSON.parse(JSON.stringify(self.view_mode));
 
@@ -537,10 +537,10 @@ var catalog = {
                         <input class="is-checkradio" type="checkbox" id="checkbox_pictures" name="col" value="pictures" ${!(params.has('filter')) && "checked"}>
                         <label for="checkbox_pictures">${tstring.collection_filter_pictures}</label>
                     </li>
-                    <li>
+                    <!-- li>
                         <input class="is-checkradio" type="checkbox" id="checkbox_immovable" name="col" value="immovables" ${!(params.has('filter')) && self.view_mode !== 'timeline' && "checked"} ${self.view_mode === 'timeline' && 'disabled'}>
                         <label for="checkbox_immovable">${tstring.collection_filter_fields}</label>
-                    </li>
+                    </li -->
                     <li>
                         <input class="is-checkradio" type="checkbox" id="checkbox_documents" name="col" value="documents_catalog" ${!(params.has('filter')) && "checked"}>
                         <label for="checkbox_documents">${tstring.collection_filter_documents}</label>
@@ -913,7 +913,7 @@ var catalog = {
             }
 
             // checkbox_immovable
-            if (table_selector_container) {
+            /*if (table_selector_container) {
                 const checkbox_immovable = currentForm.querySelector(
                     "#checkbox_immovable"
                 );
@@ -928,7 +928,7 @@ var catalog = {
                     self.changed_table_selector(e);
                     removeParam('filter');
                 });
-            }
+            }*/
 
             // checkbox_documents
             if (table_selector_container) {
@@ -1299,7 +1299,7 @@ var catalog = {
             ar_tables = [
                 "objects",
                 "pictures",
-                "immovables",
+                //"immovables",
                 "documents_catalog",
             ];
         }
@@ -1357,7 +1357,7 @@ var catalog = {
                         self.loaded_items = {
                             objects: { results: [], loaded: 0 },
                             pictures: { results: [], loaded: 0 },
-                            immovables: { results: [], loaded: 0 },
+                            //immovables: { results: [], loaded: 0 },
                             documents: { results: [], loaded: 0 },
                         }
                         var content = templateModules.bloque_catalogo_default(self);
