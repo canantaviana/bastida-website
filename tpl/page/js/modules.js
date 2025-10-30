@@ -85,7 +85,7 @@ var templateModules = {
                                                             </div>
                                                             ${(row.type)?
                                                             `<p class="has-text-weight-medium mb-3">
-                                                                <a href="/activities/?type=${row.type}" class="link-dn is-relative">${row.type}</a>
+                                                                <a href="/actividades/?type=${row.type}" class="link-dn is-relative">${row.type}</a>
                                                             </p>`
                                                             :''}
                                                             <img loading="lazy" src="${image_url}" alt="">
@@ -163,7 +163,7 @@ var templateModules = {
                             </div>
                             ${(row.type)?
                             `<p class="has-text-weight-medium mb-3">
-                                <a href="/activities/?type=${row.type}" class="link-dn is-relative">${row.type}</a>
+                                <a href="/actividades/?type=${row.type}" class="link-dn is-relative">${row.type}</a>
                             </p>`
                             :''}
                             <img loading="lazy" src="${image_url}" alt="">

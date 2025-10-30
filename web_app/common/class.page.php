@@ -72,6 +72,8 @@ class page {
     // menu_tree
     public $menu_tree;
 
+	public $closeButton = false;
+
 	/**
 	* __CONSTRUCT
 	* @param object $reference_page

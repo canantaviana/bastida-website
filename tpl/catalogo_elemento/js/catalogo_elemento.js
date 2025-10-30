@@ -343,7 +343,8 @@ var item = {
             `
                     : ""
             }
-            ${
+        `;
+        /*    ${
                 row.lugar && lugarData
                     ? `
             <dt>${tstring.item_immovable}</dt>
@@ -351,7 +352,7 @@ var item = {
             `
                     : ""
             }
-        `;
+        `;*/
     },
 
     templateFieldsImmovable: function (row) {
@@ -430,7 +431,8 @@ var item = {
             `
                     : ""
             }
-            ${
+        `;
+        /*    ${
                 row.lugar && lugarData
                     ? `
             <dt>${tstring.item_immovable}</dt>
@@ -451,7 +453,7 @@ var item = {
             `
                     : ""
             }
-        `;
+        `;*/
     },
 
     templateFields: function (row) {
@@ -1144,7 +1146,7 @@ var item = {
         `);
     },
 
-    templateJacimentVisit: function (target, row) {
+    /*templateJacimentVisit: function (target, row) {
         const template = htmlTemplate(`
             <h2 class="accordion-header visit-jaciment" style="display:none">
                 <button type="button">${tstring.item_jaciment_visit}</button>
@@ -1164,7 +1166,7 @@ var item = {
                 target2.style.display = "block";
             }
         })
-    },
+    },*/
 
     templateResources: function (row) {
         if (typeof row.documentos === "undefined") {
@@ -1707,11 +1709,11 @@ var item = {
         //patrimoni relacionat
         appendTemplate(acordion, this.templateRelated(row));
 
-        if (row.tpl === "imm") {
+        /*if (row.tpl === "imm") {
             //visita al jaciment
             this.templateJacimentVisit(acordion, row);
             appendTemplate(acordion, this.templateRelatedJaciments(row));
-        }
+        }*/
 
         //recursos
         appendTemplate(acordion, this.templateResources(row));
