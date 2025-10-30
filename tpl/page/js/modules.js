@@ -333,12 +333,8 @@ var templateModules = {
                     </div>
                 </div>
             </div>
-            <div class="default_cats mt-8 flow--xl">
-            </div>
         </div>`);
         var children_container = contentBase[0].querySelector('.swiper-container .swiper-wrapper');
-
-        var children_container_cats = contentBase[0].querySelector('div.default_cats');
 
         api.getPublicacionesDestacados().then(function(results){
             var content = htmlTemplate(`
@@ -377,66 +373,6 @@ var templateModules = {
             `);
             appendTemplate(children_container, content);
             swiperPublications('ultimes');
-        });
-        api.getPublicacionesSeries().then(function(results){
-            results.forEach(function(elem){
-                var content = htmlTemplate(`
-                <div class="default_last mt-8 flow--xl">
-                    <div class="is-flex is-justify-content-space-between is-align-items-center gap-4 mb-5">
-                        <h2>${elem.name}</h2>
-                        <a href="/publicaciones/${normalitzaText(elem.name)}" class="button button--simple-2">${tstring.collection_see_all}</a>
-                    </div>
-                    <div class="swiper-container is-relative">
-                        <div class="swiper swiper--publications swiper--publications-${elem.id}">
-                            <div class="swiper-wrapper">
-                            </div>
-                        </div>
-                        <div class="swiper--publications-${elem.id}__btns">
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                    </div>
-                </div>
-                `);
-                var children_container = content[0].querySelector('.swiper-container .swiper-wrapper');
-                api.getPublicacionesDestacados(elem.id).then(function(results){
-                    var content = htmlTemplate(`
-                        ${results.map(function(row){
-                            const url = page_globals.__WEB_ROOT_WEB__ + '/' + row.tpl + '/' + row.section_id;
-                            var info = [];
-                            if (row.autor) {
-                                info.push(row.autor);
-                            }
-                            if (row.fecha_publicacion) {
-                                info.push(row.fecha_publicacion);
-                            }
-                            var image_url = '/assets/img/placeholder.png';
-                            if (row.pdf !== null) {
-                                image_url = __WEB_MEDIA_ENGINE_URL__+imgPdf(row.pdf);
-                            }
-
-                            return `
-                            <div class="swiper-slide">
-                                <h3 class="is-size-6">
-                                    <a href="${url}" target="_blank">${row.titulo}</a>
-                                </h3>
-                                <div class="pubs-list__pict is-flex is-flex-direction-column is-justify-content-center is-align-items-center flex-order mb-4">
-                                    <img loading="lazy" src="${image_url}" alt="">
-                                </div>
-                                ${(info.length > 0)?`
-                                <p class="is-size-7">
-                                    ${info.join('<br>')}
-                                </p>
-                                `:''}
-                            </div>
-                            `;
-                        }).join('')}
-                    `);
-                    appendTemplate(children_container, content);
-                });
-                appendTemplate(children_container_cats, content);
-                swiperPublications(elem.id);
-            });
         });
         return contentBase;
     },

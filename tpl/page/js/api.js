@@ -56,38 +56,6 @@ var api = {
         return page.get_records(options);
     },
 
-    getPublicacionesSeries: function() {
-        //Galeria de Serie de Trabajos Varios -> 3
-        //Galeria de Revista APL -> 9
-        //Galeria de Labor del SIP -> 4
-        //Galeria de Catálogos -> 8
-        //Galeria de Publicaciones Diverses -> 7
-        //Galeria Didáctica -> 6
-        //Galeria de Dodia -> 13
-        var options = {
-            table: 'publications',
-            ar_fields: "serie,serie_data",
-            sql_filter: 'serie_data is not null and serie_data in (\'["3"]\', \'["9"]\', \'["4"]\', \'["8"]\', \'["7"]\', \'["6"]\', \'["13"]\')',
-            limit: 0,
-            order: 'fecha_publicacion ASC',
-            //ar_fields: '*',
-            group: 'serie_data',
-            parse: this.parseSeries,
-        };
-        return page.get_records(options);
-    },
-
-    parseSeries: function(rows) {
-        var result = rows.map(value => {
-            return {
-                'name': value.serie,
-                'id': JSON.parse(value.serie_data)[0]
-            }
-        });
-        return result;
-    },
-
-
     getActividadesActuales: function() {
         var options = {
             table: 'activities',
