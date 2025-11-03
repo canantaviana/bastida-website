@@ -97,7 +97,7 @@ var faqs =  {
 				const pregunta = common.create_dom_element({
 						element_type 	: "p",
 						class_name 		: "left-align-text question",
-						inner_html 	 	: row.pregunta,
+						inner_html 	 	: row.title,
 						parent 			: content
 				})
 
@@ -110,7 +110,7 @@ var faqs =  {
 				const respuesta = common.create_dom_element({
 						element_type 	: "p",
 						class_name 		: "answer hide justify-text",
-						inner_html 	 	: row.respuesta,
+						inner_html 	 	: row.abstract,
 						parent 			: content
 				})
 
