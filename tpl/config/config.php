@@ -9,7 +9,7 @@
 
 
 // source data api
-$environment = 'pre'; // pre , prod
+$environment = 'prod'; // pre , prod
 
 
 
@@ -174,6 +174,7 @@ $environment = 'pre'; // pre , prod
 		'cuerpo' 		=> 'body',
 		'norder'		=> 'norder',
 		'imagen'		=> 'image',
+		'menu'          => 'menu',
 		//'direccion' 	=> 'direccion',
 		//'telf' 			=> 'telf',
 		//'email'			=> 'email'

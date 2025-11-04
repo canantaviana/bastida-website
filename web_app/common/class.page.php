@@ -308,7 +308,7 @@ class page {
         return '{
             "id": "'.$template_name.'",
             "template": "'.$template_name.'",
-            "table": "ts_web_mupreva",
+            "table": "ts_web_bastida",
             "detail": [
                 {
                     "type": "title",

@@ -54,6 +54,9 @@
 		
 		// ul drawer
 			$ul_drawer = function($term_id, $html) {
+				if (empty($html)) {
+					return '';
+				}
 				if($term_id===WEB_MENU_PARENT) {
 					$html = PHP_EOL . '<ul class="links root">'.$html.'</ul>';
 				}else{

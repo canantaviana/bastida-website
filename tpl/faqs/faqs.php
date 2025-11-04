@@ -53,18 +53,16 @@
 		$options = new stdClass();
 			$options->dedalo_get 	= 'records';
 			$options->table 		= 'ts_web_bastida';
-			$options->ar_fields 	= 'section_id,title,abstract,norder';
+			$options->ar_fields 	= 'section_id,term,abstract,norder';
 			$options->lang 			= WEB_CURRENT_LANG_CODE;
 			$options->order 		= 'norder ASC';
 			$options->limit 		= 30;
-			$options->sql_filter	= 'parent="'.$result->term_id.'"';
+			$options->sql_filter	= 'parent="'.$result->term_id.'" and web_path is null';
 		$response = json_web_data::get_data($options);
 
 		$data_list	= isset($response->result)
 			? $response->result
 			: [];
-
-var_dump($response);
 
 
 	// debug

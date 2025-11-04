@@ -97,7 +97,7 @@ var faqs =  {
 				const pregunta = common.create_dom_element({
 						element_type 	: "p",
 						class_name 		: "left-align-text question",
-						inner_html 	 	: row.title,
+						inner_html 	 	: row.term,
 						parent 			: content
 				})
 
