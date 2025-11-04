@@ -1,0 +1,97 @@
+// Overwrites web Bastida
+.wrapper .wrapper {
+    padding-left: 0;
+    padding-right: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: normal;
+}
+.button {
+    text-transform: none;
+    letter-spacing: normal;
+    &:hover {
+        color: black !important;
+    }
+}
+.button--copiar {
+    color: #fff !important;
+}
+.js-tooltip-close {
+    color: #fff !important;
+}
+.button,
+button,
+button:hover {
+    box-shadow: none !important;
+}
+.accordion-header {
+    button {
+        text-transform: none;
+        letter-spacing: normal;
+        border-radius: 0;
+        width: 100%;
+        transition: none;
+        max-width: none;
+        cursor: default;
+        padding: var(--space-2xs) 0;
+        height: auto;
+        &:hover {
+            color: black !important;
+        }
+    }
+}
+
+// Forms
+input, select, textarea {
+    border: $control-border-width solid $input-border-color !important;
+    border-radius: $control-radius !important;
+    // display: inline-flex;
+    // font-size: $size-normal;
+    height: $control-height !important;
+    // justify-content: flex-start;
+    // line-height: $control-line-height;
+    // padding-bottom: $control-padding-vertical;
+    // padding-left: $control-padding-horizontal;
+    // padding-right: $control-padding-horizontal;
+    // padding-top: $control-padding-vertical;
+    // position: relative;
+    // vertical-align: top;
+}
+.select--simple select {
+    border-width: 0 0 2px 0 !important;
+    height: auto !important;
+}
+.search-form {
+    button[type="submit"] {
+        color: #fff !important;
+    }
+}
+.date-slider-labels input {
+    height: unset !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 1 !important;
+}
+.date-slider-container input[type=range] {
+    border: 0 !important;
+    height: unset !important;
+}
+
+
+input[type="checkbox"]:checked + label:before, input[type="radio"]:checked + label:before {
+    color: unset !important;
+}
+footer {
+    margin-top: var(--space-xl);
+    border-top: 1px solid $grey-light;
+    font-size: var(--step--1);
+    .inner {
+        padding-bottom: 0 !important;
+        padding-top: var(--space-m) !important;
+    }
+}

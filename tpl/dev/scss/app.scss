@@ -11,7 +11,7 @@
 
 // Variables
 // ---------
-@import "variables/hamburger";
+// @import "variables/hamburger";
 // @import "variables/mfp";
 // @import "variables/slick-slider";
 @import "variables/swiper";
@@ -81,7 +81,7 @@
 // @import "blocks/dest-list";
 @import "blocks/download-doc";
 @import "blocks/dropdown-menu";
-@import "blocks/footer";
+// @import "blocks/footer";
 @import "blocks/form";
 // @import "blocks/form-contact";
 @import "blocks/form-help";
@@ -90,7 +90,7 @@
 @import "blocks/full-bleed";
 @import "blocks/form-autocomplete";
 @import "blocks/gallery";
-@import "blocks/hamburger";
+// @import "blocks/hamburger";
 @import "blocks/highlighted-link";
 @import "blocks/highlighted-p-1";
 // @import "blocks/highlighted-p-2";
@@ -102,11 +102,11 @@
 // @import "blocks/legal";
 @import "blocks/loader";
 // @import "blocks/main-content";
-@import "blocks/main-header";
-@import "blocks/main-nav";
+// @import "blocks/main-header";
+// @import "blocks/main-nav";
 @import "blocks/mfp";
 @import "blocks/modal-audiovisuals";
-@import "blocks/navigation";
+// @import "blocks/navigation";
 @import "blocks/news-form";
 @import "blocks/pagination";
 @import "blocks/related-docs";
@@ -139,12 +139,12 @@
 @import "blocks/expos-list";
 @import "blocks/fitxa-intro";
 @import "blocks/galeria";
-@import "blocks/header-search";
-@import "blocks/home-grid";
+// @import "blocks/header-search";
+// @import "blocks/home-grid";
 @import "blocks/map";
 @import "blocks/masonry-grid";
 @import "blocks/more-link";
-@import "blocks/navigation-sub";
+// @import "blocks/navigation-sub";
 @import "blocks/pubs-list";
 @import "blocks/pub-text-results";
 @import "blocks/swiper-activitats";
@@ -153,7 +153,7 @@
 @import "blocks/swiper-home";
 @import "blocks/swiper-publicacions";
 @import "blocks/table-collapsibles";
-@import "blocks/thesaurus";
+// @import "blocks/thesaurus";
 @import "blocks/timeline";
 @import "blocks/timeline-overwrites";
 @import "blocks/tooltip";
@@ -166,6 +166,10 @@
 // Estils per editor Dédalo
 // -------------------------
 @import "blocks/block-dedalo";
+
+// Estils La Bastida
+// -------------------------
+@import "blocks/bastida";
 
 // només utilitzar pels exemples:
 .box {

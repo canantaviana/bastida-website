@@ -213,7 +213,7 @@ module.exports = (gulp) => {
       'generate:css',
       'generate:img',
       'generate:imgcss',
-      'generate:favicons',
+      //'generate:favicons',
       'generate:fonts'
     )
   ));

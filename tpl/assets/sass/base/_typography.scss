@@ -66,7 +66,7 @@
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: _font(weight);
 		line-height: 1.375;
-		letter-spacing: _font(kerning);
+		// letter-spacing: _font(kerning);
 		margin: 0 0 (_size(element-margin) * 0.5) 0;
 
 		a {
