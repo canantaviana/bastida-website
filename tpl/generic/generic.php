@@ -49,10 +49,56 @@
 		$area_table = $this->area_table; // like 'contextos'
 		$section_id = $this->row->section_id; // like 1
 
+
+
+
+		$options = new stdClass();
+			$options->dedalo_get 	= 'records';
+			$options->table 		= 'ts_web_bastida';
+			$options->ar_fields 	= '*';
+			$options->lang 			= WEB_CURRENT_LANG_CODE;
+			$options->order 		= 'norder ASC';
+			$options->limit 		= 30;
+			$options->sql_filter	= 'parent="'.$this->row->term_id.'"';
+			/*$options->resolve_portals_custom = [
+				"other_images" => "image"
+			];*/
+
+		$response = json_web_data::get_data($options);
+
+		$subpages	= isset($response->result)
+			? $response->result
+			: [];
+
+		foreach ($subpages as $key => $subpage) {
+			// resolve image full url
+			if (!empty($subpage->other_images_resolved)) {
+				$other_images = json_decode($subpage->other_images_resolved);
+				$subpages[$key]->other_images_resolved = array_map(function($item){
+					return __WEB_BASE_URL__ . $item;
+				}, (array)$other_images);
+			}
+		}
+
 	// debug dumps
 		// dump($template_map->{$mode}, ' $template_map->{$mode} ++ '.to_string()); die();
 		#dump($this, ' this ++ '.to_string());
 		
+
+
+
+
+	$gallery_data = [];
+	if (!empty($this->row->other_images_resolved)) {
+		$other_images = json_decode($this->row->other_images_resolved);
+		$gallery_data = array_map(function($item){
+			return __WEB_BASE_URL__ . $item;
+		}, (array)$other_images);
+	}
+
+
+
+
 
 	$ar_calls = [];
 	$table_section_id = [];
@@ -279,7 +325,6 @@
 			}, $element->result);
 
 		}
-
 
 
 	#die();

@@ -53,6 +53,33 @@
 						<?php echo $body ?>
 					</section>
 
+				<!-- subpages -->
+					<?php if(!empty($subpages)) { ?>
+					<div class="portals_list">
+						<?php foreach ($subpages as $key => $page) { ?>
+						<section class="spotlight style2 orient-left content-align-left image-position-center onscroll-image-fade-in onload-image-fade-in image_list">
+							<div class="content">
+								<h2><?php echo $page->title ?></h2>
+								<?php echo $page->abstract ?>
+								<ul class="actions stacked">
+									<li>
+										<a href="<?php echo $page->web_path ?>" class="button"><?php echo tstring('ver_mas') ?></a>
+									</li>
+								</ul>
+							</div>
+							<?php if ($page->other_images_resolved && count($page->other_images_resolved) > 0): ?>
+							<div class="image">
+								<a href="<?php echo $page->web_path ?>">
+									<img src="<?php echo $page->other_images_resolved[0] ?>">
+								</a>
+							</div>
+							<?php endif ?>
+						</section>
+						<?php } ?>
+					</div>
+					<?php } ?>
+
+
 				<!-- PDF -->
 					<?php if (!empty($pdf)) { ?>
 					<section class="pdf">
@@ -63,14 +90,14 @@
 					<?php } ?>
 
 				<!-- Portals -->
-					<div id="portals_list"></div>
+					<div id="portals_list" class="portals_list"></div>
 
 				<!-- Gallery -->
 					<?php if (!empty($gallery_data)) { ?>
-					<section class="images">
+					<section class="images galeria_digital banner onload-image-fade-in">
 						<?php foreach ($gallery_data as $key => $gallery) { ?>
-							<a href="<?php echo $image ?>" class="gallery image fit">
-								<img src="<?php echo $image ?>" alt="" class="image_big" />
+							<a href="<?php echo $gallery ?>" class="gallery image fit">
+								<img src="<?php echo $gallery ?>" alt="" class="image_big" />
 							</a>
 						<?php } ?>
 					</section>

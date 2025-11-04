@@ -175,6 +175,7 @@ $environment = 'prod'; // pre , prod
 		'norder'		=> 'norder',
 		'imagen'		=> 'image',
 		'menu'          => 'menu',
+		'other_images_resolved'		=> 'other_images_resolved',
 		//'direccion' 	=> 'direccion',
 		//'telf' 			=> 'telf',
 		//'email'			=> 'email'
