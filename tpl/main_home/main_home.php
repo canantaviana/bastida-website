@@ -1,8 +1,6 @@
 <?php
 
-
-array_pop(page::$css_ar_url);
-page::$css_ar_url[] = __WEB_TEMPLATE_WEB__ . '/assets/css/bastida-home.css';
+page::$css_ar_url['app'] = __WEB_TEMPLATE_WEB__ . '/assets/css/bastida-home.css';
 
 // main_home
 	$title 			= $this->get_element_from_template_map('title', $template_map->{$mode});
