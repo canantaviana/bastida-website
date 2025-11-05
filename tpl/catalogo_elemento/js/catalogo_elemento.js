@@ -877,7 +877,7 @@ var item = {
                                 ${row.periodo.split(',').map((el, i) => (
                                     `<div class="tab-content" id="periodo-tab${i}" role="tabpanel">
                                         <div id="periodo-relations${i}"></div>
-                                        <div id="periodo-load-more${i}"></div>
+                                        <div id="periodo-load-more${i}" class="mt-5 has-text-centered"></div>
                                     </div>`
                                 )).join('')}
                             </div>
@@ -919,7 +919,7 @@ var item = {
                                 ${row.nombre_bien.split(',').map((el, i) => (
                                     `<div class="tab-content" id="nombre_bien-tab${i}" role="tabpanel">
                                         <div id="nombre_bien-relations${i}"></div>
-                                        <div id="nombre_bien-load-more${i}"></div>
+                                        <div id="nombre_bien-load-more${i}" class="mt-5 has-text-centered"></div>
                                     </div>`
                                 )).join('')}
                             </div>
@@ -960,7 +960,7 @@ var item = {
                                 ${row.materia.split(',').map((el, i) => (
                                     `<div class="tab-content" id="materia-tab${i}" role="tabpanel">
                                         <div id="materia-relations${i}"></div>
-                                        <div id="materia-load-more${i}"></div>
+                                        <div id="materia-load-more${i}" class="mt-5 has-text-centered"></div>
                                     </div>`
                                 )).join('')}
                             </div>
@@ -1001,7 +1001,7 @@ var item = {
                                 ${row.tecnica.split(',').map((el, i) => (
                                     `<div class="tab-content" id="tecnica-tab${i}" role="tabpanel">
                                         <div id="tecnica-relations${i}"></div>
-                                        <div id="tecnica-load-more${i}"></div>
+                                        <div id="tecnica-load-more${i}" class="mt-5 has-text-centered"></div>
                                     </div>`
                                 )).join('')}
                             </div>
