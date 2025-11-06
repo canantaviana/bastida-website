@@ -1,8 +1,8 @@
 // ------
 // GLOBAL
 // ------
-@import "base/_googleFonts_Archivo-swap.scss";
-@import "base/_googleFonts_Noto Serif-swap.scss";
+// @import "base/_googleFonts_Archivo-swap.scss";
+// @import "base/_googleFonts_Noto Serif-swap.scss";
 @import "base/utopia";
 
 // Bulma cusotmize
@@ -42,7 +42,7 @@
 // Utility (https://cube.fyi/utility.html#utility)
 // -------
 @import "utilities/flex-order";
-@import "utilities/flow";
+// @import "utilities/flow";
 @import "utilities/full-link";
 @import "utilities/gap";
 @import "utilities/h-100";
@@ -137,7 +137,7 @@
 @import "blocks/dl-list";
 @import "blocks/dl-minimal";
 @import "blocks/expos-list";
-@import "blocks/fitxa-intro";
+// @import "blocks/fitxa-intro";
 @import "blocks/galeria";
 // @import "blocks/header-search";
 // @import "blocks/home-grid";

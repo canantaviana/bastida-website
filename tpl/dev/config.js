@@ -4,11 +4,7 @@ module.exports = function () {
       'app.css': [
         // Estils del web
         'dev/scss/app.scss'
-      ],
-      'bastida-home.css': [
-        // Estils del web
-        'dev/scss/bastida-home.scss'
-      ],
+      ]
     },
 
     jsFiles: {
