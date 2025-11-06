@@ -151,6 +151,12 @@ class yacimientos {
 					$ar_fields = ['section_id','titulo AS title','autor_label AS abstract','imagen_identificativa'];
 					$resolve_portals_custom = false;
 					break;
+				case 'immovables':
+					$ar_fields = ['section_id','titulo AS title','resumen AS abstract','imagenes_identificativas'];
+					$resolve_portals_custom = [
+						'imagenes_identificativas' => 'image'
+					];
+					break;
 				default:
 					$ar_fields = '*';
 					$resolve_portals_custom = false;
@@ -290,7 +296,12 @@ class yacimientos {
 				}elseif (strpos($row->abstract, '<br>')!==false) {
 					$row->abstract = substr($row->abstract, 0 ,strpos($row->abstract, '<br>')+4);
 				}				
-				break;			
+				break;	
+			case 'immovables':
+				$row->table = $table;
+				$row->image = isset($row->imagenes_identificativas[0]->image) ? __WEB_BASE_URL__ . $row->imagenes_identificativas[0]->image : null;
+				unset($row->imagenes_identificativas);
+				break;		
 			default:
 				break;
 		}

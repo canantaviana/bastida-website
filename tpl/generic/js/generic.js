@@ -82,6 +82,9 @@ var generic =  {
 				case 'tematicas':
 					class_name = 'spotlight style2 orient-left content-align-left image-position-center onscroll-image-fade-in onload-image-fade-in';
 					break
+				case 'immovables':
+					class_name = 'spotlight style2 orient-right content-align-left image-position-center onscroll-image-fade-in onload-image-fade-in image_list';
+					break
 			}
 			//class_name = " banner onload-image-fade-in"
 			//class_name = "spotlight onscroll-image-fade-in"
@@ -277,8 +280,11 @@ var generic =  {
 	* GOTO_DETAIL
 	*/
 	goto_detail : function(table, section_id, loading_more) {
+		var href = page_globals.__WEB_ROOT_WEB__ + '/'+ WEB_AREA + '/' + table + '/' + section_id
+		if (table === 'immovables') {
+			href = page_globals.__WEB_ROOT_WEB__ + '/imm/' + section_id
+		}
 		
-		const href = page_globals.__WEB_ROOT_WEB__ + '/'+ WEB_AREA + '/' + table + '/' + section_id
 		
 		if (loading_more===true) {
 			window.open(href, '_blank');

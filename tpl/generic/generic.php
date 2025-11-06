@@ -307,6 +307,52 @@
 		}
 
 
+
+
+
+
+
+
+	// yacimientos
+		$table  = 'immovables';
+		$ar_section_id = json_decode($this->row->immovables);
+		if (!empty($this->row->immovables)) {
+			$ar_calls[] = (object)[
+				'id' 	  => $table,
+				'options' => yacimientos::get_search_options_from_table($table, $ar_section_id, $offset, $limit)
+ 			];
+ 			$table_section_id[$table] = $ar_section_id;
+		}
+
+	// children yacimientos
+		/*$temas_children_tables = ['immovables'];
+		if (in_array($area_table, $temas_children_tables)) {			
+			// resove inverse childrens	
+
+			$ar_fields = ['section_id','titulo as title','resumen as abstract','imagenes_identificativas'];
+			$resolve_portals_custom = [
+				'imagenes_identificativas' => 'image'
+			];
+
+			$options = new stdClass();
+				$options->dedalo_get 	= 'records';
+				$options->table 		= $area_table; // 'contextos';
+				$options->ar_fields 	= $ar_fields;
+				$options->lang 			= WEB_CURRENT_LANG_CODE;
+				//$options->sql_filter 	= 'parent LIKE \'%"'.$section_id.'"%\'';
+				$options->section_id 	= implode(',', json_decode($this->row->immovables));		
+				$options->limit 		= 100;
+				$options->offset 		= 0;
+				$options->order 		= 'section_id ASC';
+				$options->resolve_portals_custom = $resolve_portals_custom;
+			
+			$ar_calls[] = (object)[
+				'id' 	  => 'immovables',
+				'options' => $options
+ 			];
+		}*/
+
+
 	// api combi call
 		$options = new stdClass();
 			$options->dedalo_get 	= 'combi';

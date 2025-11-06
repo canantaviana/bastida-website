@@ -154,6 +154,7 @@ $environment = 'prod'; // pre , prod
 		'galeria_ephemera' => 'ficha_galeria_ephemera',
 		'galeria_video' => 'ficha_galeria_video',
 		'galeria_audio' => 'ficha_galeria_audio',
+		'immovables' => 'Pagina generica',
 	]);
 
 
@@ -175,7 +176,8 @@ $environment = 'prod'; // pre , prod
 		'norder'		=> 'norder',
 		'imagen'		=> 'image',
 		'menu'          => 'menu',
-		'other_images_resolved'		=> 'other_images_resolved',
+		'other_images_resolved' => 'other_images_resolved',
+		//'locatitzations'				=> 'immovables',
 		//'direccion' 	=> 'direccion',
 		//'telf' 			=> 'telf',
 		//'email'			=> 'email'
