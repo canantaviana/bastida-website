@@ -28,7 +28,7 @@ $environment = 'prod'; // pre , prod
 			: 'https://pre-dedalo.mupreva.org/');
 
 	// media base url
-		define('__WEB_MEDIA_BASE_URL__', 'http://www.mupreva.org');
+		define('__WEB_MEDIA_BASE_URL__', 'http://bastidaalcusses.es');
 
 	// __web_root_web__
 		//$parts = explode('/',$_SERVER['REQUEST_URI']);

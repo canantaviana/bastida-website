@@ -17,7 +17,6 @@
 		page::$css_ar_url[] = __WEB_TEMPLATE_WEB__ . '/assets/css/main.css';		
 		page::$css_ar_url[] = __WEB_TEMPLATE_WEB__ . '/assets/lib/jquery-colorbox/example4/colorbox.css';
 		page::$css_ar_url[] = __WEB_TEMPLATE_WEB__ . '/page/css/page.css';
-		page::$css_ar_url['app'] = __WEB_TEMPLATE_WEB__ . '/assets/css/app.css';
 
 
 	# js		

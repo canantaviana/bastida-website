@@ -1,7 +1,5 @@
 <?php
 
-page::$css_ar_url['app'] = __WEB_TEMPLATE_WEB__ . '/assets/css/bastida-home.css';
-
 // main_home
 	$title 			= $this->get_element_from_template_map('title', $template_map->{$mode});
 	$abstract  		= $this->get_element_from_template_map('abstract', $template_map->{$mode});
