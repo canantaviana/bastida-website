@@ -1021,10 +1021,10 @@ var item = {
         self.relationsData = {}
 
         const elementsDic = {
-            'objects': 'object',
-            'pictures': 'picture',
-            'immovables': 'immovable',
-            'documents_catalog': 'documents_catalog'
+            'objects': 'cat',
+            'pictures': 'img',
+            'immovables': 'imm',
+            'documents_catalog': 'doc'
         }
 
         function updateCategoryRelations(category, tab) {
