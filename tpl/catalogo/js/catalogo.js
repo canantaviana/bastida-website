@@ -128,6 +128,8 @@ var catalog = {
             ? self.catalog_config.view_mode
             : "list";
 
+        self.didSearchSomething = null;
+
         const params = new URLSearchParams(window.location.search);
         if (params.has('view')) {
             switch(params.get('view')) {
@@ -160,11 +162,12 @@ var catalog = {
         // q case
         if (q && q.length > 0) {
             self.view_mode = "list";
+            // TODO: tornar a posar pictures i documents_catalog
             self.catalog_config.ar_tables = [
                 "objects",
-                "pictures",
+                // "pictures",
                 //"immovables",
-                "documents_catalog",
+                // "documents_catalog",
             ];
         }
 
@@ -1076,6 +1079,16 @@ var catalog = {
         const self = this;
         self.map_legend.innerHTML = '';
 
+        const { global_search, section_id, nombre_bien, titulo, periodo, materia, tecnica, tipologia, ubicacion, lugar } = self.form.form_items;
+
+        if (
+            global_search.q !== '' || section_id.q !== '' || nombre_bien.q !== '' || titulo.q !== '' || periodo.q !== '' || materia.q !== '' || tecnica.q !== '' || tipologia.q !== '' || ubicacion.q !== '' || lugar.q !== ''
+        ) {
+            self.didSearchSomething = true;
+        } else {
+            self.didSearchSomething = false;
+        }
+
         return new Promise(function (resolve) {
             // options
             options = typeof options !== "undefined" ? options : {};
@@ -1118,7 +1131,7 @@ var catalog = {
                 //order: (self.view_mode === 'map') ? null : order
                 order: order,
             }).then((response) => {
-                if(!self.default_submit) {
+                if(!self.default_submit && self.didSearchSomething === true) {
                     const total = response.total || response.result.length || 0;
                     const resultsCountNode = document.createElement('p');
                     resultsCountNode.className = 'has-text-right';
@@ -1296,11 +1309,12 @@ var catalog = {
             }
         }
         if (ar_tables.length < 1) {
+            // TODO: tornar a posar pictures i documents_catalog
             ar_tables = [
                 "objects",
-                "pictures",
+                // "pictures",
                 //"immovables",
-                "documents_catalog",
+                // "documents_catalog",
             ];
         }
 
@@ -1353,7 +1367,7 @@ var catalog = {
                         self.export_data_container.classList.remove("is-hidden");
                     }
 
-                    if (self.default_submit) {
+                    if (self.default_submit || self.didSearchSomething === false) {
                         self.loaded_items = {
                             objects: { results: [], loaded: 0 },
                             pictures: { results: [], loaded: 0 },

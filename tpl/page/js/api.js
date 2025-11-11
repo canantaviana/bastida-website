@@ -45,7 +45,7 @@ var api = {
             sql_filter: `pertenencia_data like 1 AND destacado = 1`,
             limit: 6,
             order: 'fecha_publicacion desc',
-            //ar_fields: '*',
+            ar_fields: "section_tipo,section_id,autor,fecha_publicacion,pdf,titulo",
             parse: page.parse_list_data,
             //resolve_portals_custom: '{"imagen_identificativa": "image"}'
         };
@@ -61,7 +61,7 @@ var api = {
             table: 'activities',
             sql_filter: "time_frame is not null and NOW() BETWEEN STR_TO_DATE(SUBSTRING_INDEX(time_frame, ',', 1), '%Y-%m-%d %H:%i:%s') AND STR_TO_DATE(SUBSTRING_INDEX(time_frame, ',', -1), '%Y-%m-%d %H:%i:%s') and "+this.categoryToSql(this.activitadesCategorias()),
             //limit: 6,
-            order: 'time_frame asc',
+            order: 'time_frame desc',
             ar_fields: '*',
             parse: page.parse_list_data,
             //resolve_portals_custom: '{"image": "image"}'
@@ -95,7 +95,9 @@ var api = {
 
     getOldestDate: function() {
         var options = {
-            table: "objects,pictures,immovables,documents_catalog",
+            // TODO: tornar a posar pictures i documents_catalog
+            // table: "objects,pictures,immovables,documents_catalog",
+            table: "objects,immovables",
             ar_fields: "datacion_ini",
             sql_filter: "datacion_ini IS NOT NULL",
             order: "datacion_ini ASC",
@@ -106,7 +108,9 @@ var api = {
 
     getNewestDate: function() {
         var options = {
-            table: "objects,pictures,immovables,documents_catalog",
+            // TODO: tornar a posar pictures i documents_catalog
+            // table: "objects,pictures,immovables,documents_catalog",
+            table: "objects,immovables",
             ar_fields: "datacion_fin",
             sql_filter: "datacion_fin IS NOT NULL",
             order: "datacion_fin DESC",
