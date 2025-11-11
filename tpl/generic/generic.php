@@ -314,6 +314,7 @@
 
 
 	// yacimientos
+	if (isset($this->row->immovables) && !empty($this->row->immovables)) {
 		$table  = 'immovables';
 		$ar_section_id = json_decode($this->row->immovables);
 		if (!empty($this->row->immovables)) {
@@ -323,6 +324,7 @@
  			];
  			$table_section_id[$table] = $ar_section_id;
 		}
+	}
 
 	// children yacimientos
 		/*$temas_children_tables = ['immovables'];
