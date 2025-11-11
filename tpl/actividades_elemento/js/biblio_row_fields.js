@@ -629,9 +629,15 @@ var biblio_row_fields = {
 		}
 
 		// line
-			const line = common.create_dom_element({
+			const lineLi = common.create_dom_element({
 				element_type 	: "li",
 				class_name 		: "info_line row_title"
+			})
+
+            const line = common.create_dom_element({
+				element_type 	: "a",
+                href: (biblio_object.publications_data)?'/pub/'+JSON.parse(biblio_object.publications_data)[0]:'#',
+                parent			: lineLi
 			})
 
 		// authors
