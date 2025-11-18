@@ -314,10 +314,13 @@
 
 
 	// yacimientos
-	if (isset($this->row->immovables) && !empty($this->row->immovables)) {
+	if (isset($this->row->location_data) && !empty($this->row->location_data)) {
 		$table  = 'immovables';
-		$ar_section_id = json_decode($this->row->immovables);
-		if (!empty($this->row->immovables)) {
+		$ar_section_id = json_decode($this->row->location_data);
+		foreach ($ar_section_id as $key => $value) {
+			$ar_section_id[$key] = explode('_', $value)[1];
+		}
+		if (!empty($this->row->location_data)) {
 			$ar_calls[] = (object)[
 				'id' 	  => $table,
 				'options' => yacimientos::get_search_options_from_table($table, $ar_section_id, $offset, $limit)
