@@ -302,6 +302,17 @@ var item = {
         return datacion;
     },
 
+    getTipologyUri: function(row) {
+        if (typeof row.external_typological_uri == 'undefined') {
+            return null;
+        }
+        const uri = JSON.parse(row.external_typological_uri);
+        if (!uri || uri.length == 0) {
+            return null;
+        }
+        return uri[0].iri;
+    },
+
     templateFieldsPicture: function (row) {
         var lugarData = null;
         if (row.lugar_data) {
@@ -678,6 +689,7 @@ var item = {
     },
 
     templateTecnicPicture: function (row) {
+        const tipologyUri = this.getTipologyUri(row);
         return `
             <table class="table-collapsibles">
                 ${
@@ -686,7 +698,9 @@ var item = {
                 <tr>
                     <td></td>
                     <th>${tstring.item_tipology}</th>
-                    <td>${row.tipologia}</td>
+                    <td>
+                        ${(tipologyUri)?`<a target="_blank" href="${tipologyUri}">${row.tipologia}</a>`:row.tipologia}
+                    </td>
                 </tr>
                 `
                         : ""
@@ -754,6 +768,7 @@ var item = {
 
     templateTecnicDefault: function (row) {
         const datacion = this.datacion(row);
+        const tipologyUri = this.getTipologyUri(row);
         return `
             <table class="table-collapsibles">
                 ${
@@ -841,7 +856,7 @@ var item = {
                 <tr>
                     <td></td>
                     <th>${tstring.item_tipology}</th>
-                    <td>${row.tipologia}</td>
+                    <td>${(tipologyUri)?`<a target="_blank" href="${tipologyUri}">${row.tipologia}</a>`:row.tipologia}</td>
                 </tr>
                 `
                         : ""
