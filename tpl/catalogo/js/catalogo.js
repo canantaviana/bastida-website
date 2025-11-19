@@ -505,14 +505,6 @@ var catalog = {
                             </div>
                         </div>
                     </div>
-                    <div class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd">
-                        <div class="field">
-                            <label class="label is-sr-only" for="field">${tstring.collection_field_label}</label>
-                            <div class="control">
-                                <input type="search" name="cercaJaciment" id="field" placeholder="${tstring.collection_field_label}" value="" class="input is-small">
-                            </div>
-                        </div>
-                    </div>
                     <div  class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd">
                         <div class="date-slider-labels mb-2">
                             <input type="number" id="date-slider-min" />
@@ -824,31 +816,6 @@ var catalog = {
                 eq_in: "%",
                 eq_out: "%",
                 node_input: currentForm.querySelector("#site"),
-                callback: function (form_item) {
-                    self.form.activate_autocomplete({
-                        form_item: form_item,
-                        table: self.get_tables,
-                        limit: 60,
-                        parse_result: function (ar_result, term) {
-                            return self.parse_autocomplete_result(
-                                ar_result,
-                                term,
-                                false
-                            );
-                        },
-                    });
-                },
-            });
-
-            // descripcion_relevante
-            self.form.item_factory({
-                id: "lugar",
-                name: "lugar",
-                q_column: "lugar",
-                eq: "LIKE",
-                eq_in: "%",
-                eq_out: "%",
-                node_input: currentForm.querySelector("#field"),
                 callback: function (form_item) {
                     self.form.activate_autocomplete({
                         form_item: form_item,
